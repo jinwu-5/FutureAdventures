@@ -1,7 +1,7 @@
 {
   "name": "movie-sharing",
   "version": "1.0.0",
-  "description": "A blog app using MERN stack and GraphQL",
+  "description": "A social media app built with MERN stack and GraphQL",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -10,7 +10,6 @@
   "author": "Jin Wu",
   "license": "ISC",
   "dependencies": {
-    "apollo-server": "^2.21.0",
     "apollo-server-express": "^2.21.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
