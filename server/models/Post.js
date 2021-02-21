@@ -6,6 +6,7 @@ const postSchema = new Schema({
   username: { type: String, required: true },
   content: { type: String, required: true },
   dateCreated: { type: String, required: true },
+  selectedFile: { type: String },
   comments: [
     {
       username: { type: String, required: true },

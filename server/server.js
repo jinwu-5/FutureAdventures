@@ -16,6 +16,7 @@ app.use(cors());
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: ({ req }) => ({ req }),
 });
 
 server.applyMiddleware({ app });

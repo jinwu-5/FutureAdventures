@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import { gql } from "apollo-server-express";
 
 const typeDefs = gql`
   type User {
@@ -18,13 +18,14 @@ const typeDefs = gql`
     id: ID!
     username: String!
     content: String!
+    selectedFile: String
     dateCreated: String!
     comments: [Comment]!
     postLikes: [PostLike]!
-    postLikeCount: Int!
-    commentCount: Int!
+    postLikeCount: Int
+    commentCount: Int
     commentLikes: [CommentLike]!
-    commentLikeCount: Int!
+    commentLikeCount: Int
   }
   type Comment {
     id: ID!
@@ -51,7 +52,7 @@ const typeDefs = gql`
   type Mutation {
     createUser(username: String!, password: String!, email: String!): User!
     login(username: String!, password: String!): User!
-    createPost(content: String!): Post!
+    createPost(selectedFile: String, content: String!): Post!
     deletePost(postId: ID!): String!
     createComment(postId: String!, content: String!): Post!
     deleteComment(postId: ID!, commentId: ID!): Post!

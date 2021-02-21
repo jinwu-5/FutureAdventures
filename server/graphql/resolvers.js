@@ -2,7 +2,7 @@ import User from "../models/User.js";
 import Post from "../models/Post.js";
 import bcrypt from "bcryptjs";
 import { AuthenticationError } from "apollo-server-express";
-import { generateToken } from "../utilities/auth.js";
+import { generateToken, authUser } from "../utilities/auth.js";
 
 const Resolvers = {
   Query: {
@@ -60,8 +60,8 @@ const Resolvers = {
         if (existingUser) {
           throw new Error("User exists already.");
         }
-        const hashedPassword = await bcrypt.hash(password, 12);
 
+        const hashedPassword = await bcrypt.hash(password, 12);
         const user = new User({
           username,
           password: hashedPassword,
@@ -70,9 +70,7 @@ const Resolvers = {
         });
 
         const result = await user.save();
-
         const authToken = generateToken(result);
-
         return {
           ...result._doc,
           id: result._id,
@@ -81,6 +79,23 @@ const Resolvers = {
       } catch (err) {
         throw err;
       }
+    },
+    createPost: async (_, { content, selectedFile }, context) => {
+      const user = authUser(context);
+      if (content.trim() === "") {
+        throw new Error("Post content cannot be empty");
+      }
+
+      const newPost = new Post({
+        user: user.id,
+        username: user.username,
+        selectedFile,
+        content,
+        dateCreated: new Date().toISOString(),
+      });
+
+      const post = await newPost.save();
+      return post;
     },
   },
 };
