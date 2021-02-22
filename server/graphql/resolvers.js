@@ -36,6 +36,23 @@ const Resolvers = {
     },
   },
   Mutation: {
+    deletePost: async (_, { postId }, context) => {
+      const user = authUser(context);
+      try {
+        const post = await Post.findById(postId);
+        if (!post) {
+          throw new Error("Post doesn't exist");
+        }
+        if (post.username === user.username) {
+          await post.deleteOne({ _id: postId });
+          return "Post deleted successfully";
+        } else {
+          throw new AuthenticationError("Action not allowed");
+        }
+      } catch (err) {
+        throw err;
+      }
+    },
     login: async (_, { username, password }) => {
       const user = await User.findOne({ username });
       if (!user) {
