@@ -53,17 +53,50 @@ const Resolvers = {
         throw err;
       }
     },
+    updatePost: async (_, { postId, content }, context) => {
+      const user = authUser(context);
+      try {
+        const post = await Post.findById(postId);
+        if (!post) {
+          throw new Error("Post doesn't exist");
+        }
+        if (post.username === user.username) {
+          await post.updateOne({ content });
+          return post;
+        } else {
+          throw new AuthenticationError("Action not allowed");
+        }
+      } catch (err) {
+        throw err;
+      }
+    },
+    createComment: async (_, { postId, content }, context) => {
+      const { username } = authUser(context);
+      try {
+        const post = await Post.findById(postId);
+        if (!post) {
+          throw new Error("Post doesn't exist");
+        }
+        post.comments.unshift({
+          username,
+          content,
+          dateCreated: new Date().toISOString(),
+        });
+        await post.save();
+        return post;
+      } catch (err) {
+        throw err;
+      }
+    },
     login: async (_, { username, password }) => {
       const user = await User.findOne({ username });
       if (!user) {
         throw new AuthenticationError("User not found!");
       }
-
       const checkPassword = await bcrypt.compare(password, user.password);
       if (!checkPassword) {
         throw new AuthenticationError("Incorrect login information!");
       }
-
       const authToken = generateToken(user);
       return {
         ...user._doc,
@@ -77,7 +110,6 @@ const Resolvers = {
         if (existingUser) {
           throw new Error("User exists already.");
         }
-
         const hashedPassword = await bcrypt.hash(password, 12);
         const user = new User({
           username,
@@ -85,7 +117,6 @@ const Resolvers = {
           email,
           dateCreated: new Date().toISOString(),
         });
-
         const result = await user.save();
         const authToken = generateToken(result);
         return {
@@ -99,10 +130,6 @@ const Resolvers = {
     },
     createPost: async (_, { content, selectedFile }, context) => {
       const user = authUser(context);
-      if (content.trim() === "") {
-        throw new Error("Post content cannot be empty");
-      }
-
       const newPost = new Post({
         user: user.id,
         username: user.username,
@@ -110,7 +137,6 @@ const Resolvers = {
         content,
         dateCreated: new Date().toISOString(),
       });
-
       const post = await newPost.save();
       return post;
     },
