@@ -50,14 +50,14 @@ const typeDefs = gql`
     getPost(postId: ID!): Post
   }
   type Mutation {
-    login(username: String!, password: String!): User!
     createUser(username: String!, password: String!, email: String!): User!
+    login(username: String!, password: String!): User!
     createPost(selectedFile: String, content: String!): Post!
     deletePost(postId: ID!): String!
     updatePost(postId: ID!, selectedFile: String, content: String!): Post!
     createComment(postId: String!, content: String!): Post!
-    updateComment(postId: String!, content: String!): Post!
     deleteComment(postId: ID!, commentId: ID!): Post!
+    updateComment(postId: ID!, commentId: ID!, content: String!): Post!
     likePost(postId: ID!): Post!
     likeComment(postID: ID!, commentID: ID!): Comment!
   }
