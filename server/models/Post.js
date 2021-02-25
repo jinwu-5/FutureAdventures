@@ -7,23 +7,24 @@ const postSchema = new Schema({
   content: { type: String, required: true },
   dateCreated: { type: String, required: true },
   selectedFile: { type: String },
-  comments: [
-    {
-      username: { type: String, required: true },
-      content: { type: String, required: true },
-      dateCreated: { type: String, required: true },
-    },
-  ],
   postLikes: [
     {
       username: { type: String, required: true },
       dateCreated: { type: String, required: true },
     },
   ],
-  commentLikes: [
+  comments: [
     {
       username: { type: String, required: true },
+      content: { type: String, required: true },
       dateCreated: { type: String, required: true },
+      commentLikes: [
+        {
+          username: { type: String, required: true },
+          dateCreated: { type: String, required: true },
+        },
+      ],
+      commentLikeCount: { type: Number, default: 0 },
     },
   ],
   user: {

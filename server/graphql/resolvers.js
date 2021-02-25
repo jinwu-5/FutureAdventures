@@ -116,6 +116,25 @@ const Resolvers = {
         throw err;
       }
     },
+    likePost: async (_, { postId }, context) => {
+      const user = authUser(context);
+      const post = await Post.findById(postId);
+      const index = post.postLikes.findIndex(
+        (like) => like.username === user.username
+      );
+      if (index === -1) {
+        post.postLikes.push({
+          username: user.username,
+          dateCreated: new Date().toISOString(),
+        });
+      } else {
+        post.postLikes = post.postLikes.filter(
+          (like) => like.username !== user.username
+        );
+      }
+      await post.save();
+      return post;
+    },
     createComment: async (_, { postId, content }, context) => {
       const user = authUser(context);
       try {
@@ -165,6 +184,34 @@ const Resolvers = {
         throw err;
       }
     },
+    likeComment: async (_, { postId, commentId }, context) => {
+      const user = authUser(context);
+      const post = await Post.findById(postId);
+      const getIndex = (comment) => comment.id === commentId;
+      const commentIndex = post.comments.findIndex(getIndex);
+      const index = post.comments[commentIndex].commentLikes.findIndex(
+        (like) => like.username === user.username
+      );
+      if (index === -1) {
+        post.comments[commentIndex].commentLikes.push({
+          username: user.username,
+          dateCreated: new Date().toISOString(),
+        });
+      } else {
+        post.comments[commentIndex].commentLikes = post.comments[
+          commentIndex
+        ].commentLikes.filter((like) => like.username !== user.username);
+      }
+      await post.save();
+      return post;
+    },
+  },
+  Post: {
+    commentCount: (parent) => parent.comments.length,
+    postLikeCount: (parent) => parent.postLikes.length,
+  },
+  Comment: {
+    commentLikeCount: (parent) => parent.commentLikes.length,
   },
 };
 

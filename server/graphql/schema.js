@@ -4,15 +4,9 @@ const typeDefs = gql`
   type User {
     id: ID!
     username: String!
-    dateCreated: String!
     email: String!
+    dateCreated: String!
     authToken: String!
-  }
-  type GetUser {
-    id: ID!
-    username: String!
-    dateCreated: String!
-    email: String!
   }
   type Post {
     id: ID!
@@ -20,23 +14,23 @@ const typeDefs = gql`
     content: String!
     selectedFile: String
     dateCreated: String!
-    comments: [Comment]!
     postLikes: [PostLike]!
-    postLikeCount: Int
+    postLikeCount: Int!
+    comments: [Comment]!
     commentCount: Int
-    commentLikes: [CommentLike]!
-    commentLikeCount: Int
-  }
-  type Comment {
-    id: ID!
-    dateCreated: String!
-    username: String!
-    content: String!
   }
   type PostLike {
     id: ID!
     username: String!
     dateCreated: String!
+  }
+  type Comment {
+    id: ID!
+    username: String!
+    content: String!
+    dateCreated: String!
+    commentLikes: [CommentLike]!
+    commentLikeCount: Int!
   }
   type CommentLike {
     id: ID!
@@ -44,8 +38,8 @@ const typeDefs = gql`
     dateCreated: String!
   }
   type Query {
-    getUsers: [GetUser]
-    getUser(userId: ID!): GetUser
+    getUsers: [User]
+    getUser(userId: ID!): User
     getPosts: [Post]
     getPost(postId: ID!): Post
   }
@@ -55,11 +49,11 @@ const typeDefs = gql`
     createPost(selectedFile: String, content: String!): Post!
     deletePost(postId: ID!): String!
     updatePost(postId: ID!, selectedFile: String, content: String!): Post!
+    likePost(postId: ID!): Post!
     createComment(postId: String!, content: String!): Post!
     deleteComment(postId: ID!, commentId: ID!): Post!
     updateComment(postId: ID!, commentId: ID!, content: String!): Post!
-    likePost(postId: ID!): Post!
-    likeComment(postID: ID!, commentID: ID!): Comment!
+    likeComment(postId: ID!, commentId: ID!): Post!
   }
 `;
 
