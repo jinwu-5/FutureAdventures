@@ -5,6 +5,11 @@ const typeDefs = gql`
     id: ID!
     username: String!
     email: String!
+    profileImage: String
+    followers: [Follow]
+    following: [Follow]
+    followingCount: Int!
+    followerCount: Int!
     dateCreated: String!
     authToken: String!
   }
@@ -18,6 +23,10 @@ const typeDefs = gql`
     postLikeCount: Int!
     comments: [Comment]!
     commentCount: Int
+  }
+  type Follow {
+    id: ID!
+    username: String!
   }
   type PostLike {
     id: ID!
@@ -44,7 +53,12 @@ const typeDefs = gql`
     getPost(postId: ID!): Post
   }
   type Mutation {
-    createUser(username: String!, password: String!, email: String!): User!
+    createUser(
+      username: String!
+      password: String!
+      email: String!
+      profileImage: String
+    ): User!
     login(username: String!, password: String!): User!
     createPost(selectedFile: String, content: String!): Post!
     deletePost(postId: ID!): String!
@@ -54,6 +68,7 @@ const typeDefs = gql`
     deleteComment(postId: ID!, commentId: ID!): Post!
     updateComment(postId: ID!, commentId: ID!, content: String!): Post!
     likeComment(postId: ID!, commentId: ID!): Post!
+    createFollow(userId: ID!): User!
   }
 `;
 

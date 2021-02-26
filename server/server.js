@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
-import typeDefs from "./graphql/schema.js";
-import resolvers from "./graphql/resolvers.js";
+import typeDefs from "./schema/schema.js";
+import resolvers from "./resolvers/resolvers.js";
 import mongoose from "mongoose";
 import { MONGODB } from "./config.js";
 

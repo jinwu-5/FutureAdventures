@@ -2,7 +2,7 @@ import User from "../models/User.js";
 import Post from "../models/Post.js";
 import bcrypt from "bcryptjs";
 import { UserInputError, AuthenticationError } from "apollo-server-express";
-import { generateToken, authUser } from "../utilities/auth.js";
+import { generateToken, authUser } from "../utils/auth.js";
 
 const Resolvers = {
   Query: {
@@ -36,17 +36,18 @@ const Resolvers = {
     },
   },
   Mutation: {
-    createUser: async (_, { username, password, email }) => {
+    createUser: async (_, { username, password, email, profileImage }) => {
       try {
         const existingUser = await User.findOne({ username });
         if (existingUser) {
-          throw new UserInputError("User exists already.");
+          throw new UserInputError("Username already exists.");
         }
         const hashedPassword = await bcrypt.hash(password, 12);
         const user = new User({
           username,
           password: hashedPassword,
           email,
+          profileImage,
           dateCreated: new Date().toISOString(),
         });
         const result = await user.save();
@@ -205,6 +206,37 @@ const Resolvers = {
       await post.save();
       return post;
     },
+    createFollow: async (_, { userId }, context) => {
+      const follower = authUser(context);
+      const user = await User.findById(userId);
+      if (user) {
+        const index = user.followers.findIndex(
+          (follow) => follow.username === follower.username
+        );
+        if (index === -1) {
+          user.followers.push({
+            username: follower.username,
+          });
+          // follower.following.push({
+          //   username: user.username,
+          // });
+        } else {
+          user.followers = user.followers.filter(
+            (follow) => follow.username !== follower.username
+          );
+          // follower.following = follower.following.filter(
+          //   (follow) => follow.username !== user.username
+          // );
+        }
+        await user.save();
+        return user;
+      } else {
+        throw new AuthenticationError("Action not allowed");
+      }
+    },
+  },
+  User: {
+    followerCount: (parent) => parent.followers.length,
   },
   Post: {
     commentCount: (parent) => parent.comments.length,
