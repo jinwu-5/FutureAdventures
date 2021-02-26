@@ -206,10 +206,11 @@ const Resolvers = {
       await post.save();
       return post;
     },
-    createFollow: async (_, { userId }, context) => {
-      const follower = authUser(context);
-      const user = await User.findById(userId);
-      if (user) {
+    createFollow: async (_, { userId, followerID }, context) => {
+      const authfollower = authUser(context);
+      const follower = await User.findById(followerID);
+      if (authfollower.username === follower.username) {
+        const user = await User.findById(userId);
         const index = user.followers.findIndex(
           (follow) => follow.username === follower.username
         );
@@ -217,18 +218,18 @@ const Resolvers = {
           user.followers.push({
             username: follower.username,
           });
-          // follower.following.push({
-          //   username: user.username,
-          // });
+          follower.following.push({
+            username: user.username,
+          });
         } else {
           user.followers = user.followers.filter(
             (follow) => follow.username !== follower.username
           );
-          // follower.following = follower.following.filter(
-          //   (follow) => follow.username !== user.username
-          // );
+          follower.following = follower.following.filter(
+            (follow) => follow.username !== user.username
+          );
         }
-        await user.save();
+        await user.save(), follower.save();
         return user;
       } else {
         throw new AuthenticationError("Action not allowed");
@@ -237,6 +238,7 @@ const Resolvers = {
   },
   User: {
     followerCount: (parent) => parent.followers.length,
+    followingCount: (parent) => parent.following.length,
   },
   Post: {
     commentCount: (parent) => parent.comments.length,
