@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const postSchema = new Schema({
   username: { type: String, required: true },
   content: { type: String, required: true },
-  dateCreated: { type: String, required: true },
   selectedFile: { type: String },
   postLikes: [
     {
@@ -24,9 +23,9 @@ const postSchema = new Schema({
           dateCreated: { type: String, required: true },
         },
       ],
-      commentLikeCount: { type: Number, default: 0 },
     },
   ],
+  dateCreated: { type: String, required: true },
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",

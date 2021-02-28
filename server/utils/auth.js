@@ -2,6 +2,8 @@ import jwt from "jsonwebtoken";
 import { SECRET_KEY } from "../config.js";
 import { AuthenticationError } from "apollo-server-express";
 
+//  Generate authenticaiton token
+
 const generateToken = (user) => {
   return jwt.sign(
     {
@@ -14,7 +16,7 @@ const generateToken = (user) => {
   );
 };
 
-// Verified registered users
+//  Verify registered users
 
 const authUser = (context) => {
   const authToken = context.req.headers.authorization;
