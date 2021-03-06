@@ -1,9 +1,10 @@
 import gql from "graphql-tag";
 
-export const GET_POSTS = gql`
+const GET_POSTS = gql`
   {
     getPosts {
       id
+      selectedFile
       content
       dateCreated
       username
@@ -29,3 +30,5 @@ export const GET_POSTS = gql`
     }
   }
 `;
+
+export default GET_POSTS;
