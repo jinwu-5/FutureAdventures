@@ -3,19 +3,24 @@ import "./App.css";
 import { Container } from "@material-ui/core";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
+import SignIn from "./pages/SignIn/SignIn";
+import SignUp from "./pages/SignUp/SignUp";
+import Post from "./pages/Post/Post";
+import { StoreProvider } from "./store/store";
 
 function App() {
   return (
-    <Router>
-      <Container>
-        <Navbar />
-        <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={Register} />
-      </Container>
-    </Router>
+    <StoreProvider>
+      <Router>
+        <Container>
+          <Navbar />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={SignIn} />
+          <Route exact path="/register" component={SignUp} />
+          <Route exact path="/post" component={Post} />
+        </Container>
+      </Router>
+    </StoreProvider>
   );
 }
 

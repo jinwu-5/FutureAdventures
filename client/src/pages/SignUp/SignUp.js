@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Avatar,
   Button,
@@ -14,8 +14,10 @@ import useStyles from "./styles";
 import { useMutation } from "@apollo/client";
 import { Alert } from "@material-ui/lab";
 import CREATE_USER from "../../graphql/SignUp";
+import { StoreContext } from "../../store/store";
 
 const SignUpForm = () => {
+  const context = useContext(StoreContext);
   const classes = useStyles();
   const [error, setError] = useState("");
   const [userFormData, setUserFormData] = useState({
@@ -66,12 +68,13 @@ const SignUpForm = () => {
     }
 
     try {
-      const { data } = await addUser({
+      const {
+        data: { createUser: userData },
+      } = await addUser({
         variables: { ...userFormData },
       });
-      console.log(data);
+      context.login(userData);
       window.location.assign("/");
-      localStorage.setItem("token", data.addUser.token);
     } catch (error) {
       console.error(error);
     }

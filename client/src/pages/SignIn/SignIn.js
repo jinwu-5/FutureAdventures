@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Avatar,
   Button,
@@ -16,8 +16,10 @@ import useStyles from "./styles";
 import LOGIN from "../../graphql/SignIn";
 import { useMutation } from "@apollo/client";
 import { Alert } from "@material-ui/lab";
+import { StoreContext } from "../../store/store";
 
 const SignInForm = () => {
+  const context = useContext(StoreContext);
   const classes = useStyles();
   const [error, setError] = useState("");
   const [userFormData, setUserFormData] = useState({
@@ -26,7 +28,7 @@ const SignInForm = () => {
   });
   const { username, password } = userFormData;
 
-  const [login] = useMutation(LOGIN);
+  const [signIn] = useMutation(LOGIN);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -44,12 +46,13 @@ const SignInForm = () => {
     setError("");
 
     try {
-      const { data } = await login({
+      const {
+        data: { login: userData },
+      } = await signIn({
         variables: { ...userFormData },
       });
-      console.log(data);
+      context.login(userData);
       window.location.assign("/");
-      localStorage.setItem("token", data.login.token);
     } catch (error) {
       console.error(error);
     }
