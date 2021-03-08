@@ -15,7 +15,7 @@ import useStyles from "./styles";
 import CommentIcon from "@material-ui/icons/Comment";
 import moment from "moment";
 
-function PostCard({
+const PostCard = ({
   post: {
     selectedFile,
     content,
@@ -24,7 +24,7 @@ function PostCard({
     postLikeCount,
     commentCount,
   },
-}) {
+}) => {
   const classes = useStyles();
 
   return (
@@ -44,7 +44,7 @@ function PostCard({
       <CardMedia
         className={classes.media}
         image={selectedFile}
-        title="Paella dish"
+        title="place holder"
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
@@ -70,11 +70,11 @@ function PostCard({
           color="textSecondary"
           component="p"
         >
-          {moment(dateCreated).fromNow(true)}
+          {moment(dateCreated).fromNow()}
         </Typography>
       </CardActions>
     </Card>
   );
-}
+};
 
 export default PostCard;

@@ -26,9 +26,9 @@ const userResolvers = {
     },
   },
   Mutation: {
-    // Sign up user (profileImage is not a required input)
+    // Sign up user
 
-    createUser: async (_, { username, password, email, profileImage }) => {
+    createUser: async (_, { username, password, email }) => {
       try {
         const existingUser = await User.findOne({ username });
         if (existingUser) {
@@ -40,7 +40,6 @@ const userResolvers = {
           username,
           password: hashedPassword,
           email,
-          profileImage,
           dateCreated: new Date().toISOString(),
         });
 

@@ -2,7 +2,12 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import PostCard from "../../components/PostCard/PostCard";
 import GET_POSTS from "../../graphql/GetPosts";
-import { Grid, CircularProgress, Typography } from "@material-ui/core";
+import {
+  Grid,
+  CircularProgress,
+  Typography,
+  Container,
+} from "@material-ui/core";
 import useStyles from "./styles";
 
 function Home() {
@@ -14,7 +19,11 @@ function Home() {
   ) : (
     posts && (
       <Grid>
-        <Typography className={classes.title}>Share your Moment</Typography>
+        <Container component="main" className={classes.title}>
+          <Typography component="h1" variant="h2" align="center">
+            Share Your Moments
+          </Typography>
+        </Container>
         <Grid
           className={classes.container}
           container
@@ -26,7 +35,6 @@ function Home() {
               <PostCard post={post} />
             </Grid>
           ))}
-          ;
         </Grid>
       </Grid>
     )

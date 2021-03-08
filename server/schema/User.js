@@ -5,7 +5,6 @@ const UserSchema = gql`
     id: ID!
     username: String!
     email: String!
-    profileImage: String
     followers: [Follow]
     following: [Follow]
     followingCount: Int!
@@ -20,12 +19,7 @@ const UserSchema = gql`
   }
 
   extend type Mutation {
-    createUser(
-      username: String!
-      password: String!
-      email: String!
-      profileImage: String
-    ): User!
+    createUser(username: String!, password: String!, email: String!): User!
     login(username: String!, password: String!): User!
   }
 `;
