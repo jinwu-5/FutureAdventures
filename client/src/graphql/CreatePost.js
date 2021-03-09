@@ -1,8 +1,12 @@
 import gql from "graphql-tag";
 
-const GET_POSTS = gql`
-  {
-    getPosts {
+const CREATE_POST = gql`
+  mutation createPost(
+    $title: String!
+    $content: String!
+    $selectedFile: String
+  ) {
+    createPost(title: $title, content: $content, selectedFile: $selectedFile) {
       id
       selectedFile
       title
@@ -32,4 +36,4 @@ const GET_POSTS = gql`
   }
 `;
 
-export default GET_POSTS;
+export default CREATE_POST;

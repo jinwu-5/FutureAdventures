@@ -4,6 +4,7 @@ const PostSchema = gql`
   type Post {
     id: ID!
     username: String!
+    title: String
     content: String!
     selectedFile: String
     dateCreated: String!
@@ -19,9 +20,9 @@ const PostSchema = gql`
   }
 
   extend type Mutation {
-    createPost(selectedFile: String, content: String!): Post!
+    createPost(title: String!, content: String!, selectedFile: String): Post!
     deletePost(postId: ID!): String!
-    updatePost(postId: ID!, selectedFile: String, content: String!): Post!
+    updatePost(postId: ID!, content: String): Post!
   }
 `;
 

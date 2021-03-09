@@ -80,7 +80,7 @@ const SignInForm = () => {
               fullWidth
               autoFocus
               onChange={handleInputChange}
-              value={userFormData.username}
+              value={username}
             />
             <TextField
               variant="outlined"
@@ -91,7 +91,7 @@ const SignInForm = () => {
               required
               fullWidth
               onChange={handleInputChange}
-              value={userFormData.password}
+              value={password}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

@@ -101,7 +101,7 @@ const SignUpForm = () => {
                 fullWidth
                 autoFocus
                 onChange={handleInputChange}
-                value={userFormData.username}
+                value={username}
               />
             </Grid>
             <Grid item xs={12}>
@@ -112,7 +112,7 @@ const SignUpForm = () => {
                 required
                 fullWidth
                 onChange={handleInputChange}
-                value={userFormData.email}
+                value={email}
               />
             </Grid>
             <Grid item xs={12}>
@@ -124,7 +124,7 @@ const SignUpForm = () => {
                 label="Password"
                 type="password"
                 onChange={handleInputChange}
-                value={userFormData.password}
+                value={password}
               />
             </Grid>
           </Grid>

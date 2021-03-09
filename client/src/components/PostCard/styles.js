@@ -1,19 +1,45 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
+    margin: "auto",
+    transition: "0.3s",
+    boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
+    "&:hover": {
+      boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)",
+    },
+    position: "relative",
   },
   media: {
-    height: 0,
     paddingTop: "56.25%", // 16:9
   },
-  date: {
+  expand: {
+    transform: "rotate(0deg)",
     marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
+      duration: theme.transitions.duration.shortest,
+    }),
   },
-  avatar: {
-    backgroundColor: red[500],
+  expandOpen: {
+    transform: "rotate(180deg)",
+  },
+  username: {
+    display: "inline-block",
+    paddingRight: "5%",
+  },
+  date: {
+    display: "inline-block",
+    paddingLeft: "5%",
+  },
+  comment: {
+    marginTop: "1%",
+    marginLeft: "6%",
+  },
+  overlay: {
+    position: "absolute",
+    top: "57%",
+    left: "84%",
   },
 }));
 

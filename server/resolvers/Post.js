@@ -27,13 +27,14 @@ const postResolvers = {
   Mutation: {
     // Create a new post (selectedFile is not a required input)
 
-    createPost: async (_, { content, selectedFile }, context) => {
+    createPost: async (_, { title, content, selectedFile }, context) => {
       const user = authUser(context);
       const newPost = new Post({
         user: user.id,
         username: user.username,
-        selectedFile,
+        title,
         content,
+        selectedFile,
         dateCreated: new Date().toISOString(),
       });
 

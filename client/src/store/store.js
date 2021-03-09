@@ -6,11 +6,11 @@ const authInitialState = {
   user: null,
 };
 
-if (localStorage.getItem("Token")) {
-  const decodedToken = decode(localStorage.getItem("Token"));
+if (localStorage.getItem("token")) {
+  const decodedToken = decode(localStorage.getItem("token"));
 
   if (decodedToken.exp * 2000 < Date.now()) {
-    localStorage.removeItem("Token");
+    localStorage.removeItem("token");
   } else {
     authInitialState.user = decodedToken;
   }
@@ -22,7 +22,7 @@ const StoreProvider = (props) => {
   const [state, dispatch] = useReducer(authReducer, authInitialState);
 
   const login = (userData) => {
-    localStorage.setItem("Token", userData.authToken);
+    localStorage.setItem("token", userData.authToken);
     dispatch({
       type: "LOGIN",
       payload: userData,
@@ -30,7 +30,7 @@ const StoreProvider = (props) => {
   };
 
   const logout = () => {
-    localStorage.removeItem("Token");
+    localStorage.removeItem("token");
     dispatch({ type: "LOGOUT" });
   };
 
