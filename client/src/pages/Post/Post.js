@@ -6,7 +6,6 @@ import {
   Container,
   CssBaseline,
 } from "@material-ui/core";
-import FileBase from "react-file-base64";
 import useStyles from "./styles";
 import CREATE_POST from "../../graphql/CreatePost";
 import { useMutation } from "@apollo/client";
@@ -18,30 +17,24 @@ const Post = () => {
   const [postFormData, setPostFormData] = useState({
     title: "",
     content: "",
+    imageUrl: "",
   });
   // const [selectedFile, setSelectedFile] = useState("");
   const [error, setError] = useState("");
 
-  const { title, content } = postFormData;
+  const { title, content, imageUrl } = postFormData;
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setPostFormData({ ...postFormData, [name]: value });
   };
 
-  // const handlePostImageUpload = (event) => {
-  //   const file = event.target.files[0];
-  //   if (!file) return;
-  //   setSelectedFile(file);
-  //   event.target.value = null;
-  // };
-
   const [createPost] = useMutation(CREATE_POST);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     if (!title || !content) {
-      setError("All fields are required");
+      setError("Title and content are required");
       return;
     }
 
@@ -85,15 +78,16 @@ const Post = () => {
             onChange={handleInputChange}
             value={content}
           />
-          <div className={classes.fileInput}>
-            <FileBase
-              type="file"
-              multiple={false}
-              onDone={({ base64 }) =>
-                setPostFormData({ ...postFormData, selectedFile: base64 })
-              }
-            />
-          </div>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            name="imageUrl"
+            label="imageUrl"
+            required
+            fullWidth
+            onChange={handleInputChange}
+            value={imageUrl}
+          />
           <Button
             type="submit"
             fullWidth

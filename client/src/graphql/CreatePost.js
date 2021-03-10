@@ -1,14 +1,10 @@
 import gql from "graphql-tag";
 
 const CREATE_POST = gql`
-  mutation createPost(
-    $title: String!
-    $content: String!
-    $selectedFile: String
-  ) {
-    createPost(title: $title, content: $content, selectedFile: $selectedFile) {
+  mutation createPost($title: String!, $content: String!, $imageUrl: String) {
+    createPost(title: $title, content: $content, imageUrl: $imageUrl) {
       id
-      selectedFile
+      imageUrl
       title
       content
       dateCreated

@@ -18,7 +18,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 const PostCard = ({
   post: {
-    selectedFile,
+    imageUrl,
     title,
     content,
     dateCreated,
@@ -39,8 +39,8 @@ const PostCard = ({
       <CardMedia
         className={classes.media}
         image={
-          selectedFile ||
-          "https://images.unsplash.com/photo-1610337673044-720471f83677?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1932&q=80"
+          imageUrl ||
+          "https://images.unsplash.com/photo-1507668077129-56e32842fceb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjJ8fHF1ZXN0aW9ufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
         }
         title="place holder"
       />

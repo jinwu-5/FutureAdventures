@@ -4,7 +4,7 @@ const GET_POSTS = gql`
   {
     getPosts {
       id
-      selectedFile
+      imageUrl
       title
       content
       dateCreated

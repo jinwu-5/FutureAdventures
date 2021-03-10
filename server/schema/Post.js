@@ -6,7 +6,7 @@ const PostSchema = gql`
     username: String!
     title: String
     content: String!
-    selectedFile: String
+    imageUrl: String
     dateCreated: String!
     postLikes: [PostLike]!
     postLikeCount: Int!
@@ -20,7 +20,7 @@ const PostSchema = gql`
   }
 
   extend type Mutation {
-    createPost(title: String!, content: String!, selectedFile: String): Post!
+    createPost(title: String!, content: String!, imageUrl: String): Post!
     deletePost(postId: ID!): String!
     updatePost(postId: ID!, content: String): Post!
   }

@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
   },
   media: {
-    paddingTop: "56.25%", // 16:9
+    paddingTop: "80%",
   },
   expand: {
     transform: "rotate(0deg)",

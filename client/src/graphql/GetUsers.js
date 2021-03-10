@@ -6,14 +6,7 @@ const GET_USERS = gql`
       id
       username
       email
-      profileImage
-      followers {
-        username
-      }
       followerCount
-      following {
-        username
-      }
       followingCount
     }
   }
