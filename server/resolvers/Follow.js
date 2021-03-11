@@ -1,5 +1,4 @@
 import User from "../models/User.js";
-import { AuthenticationError } from "apollo-server-express";
 import { authUser } from "../utils/auth.js";
 
 const followResolvers = {
@@ -45,7 +44,7 @@ const followResolvers = {
         await user.save(), follower.save();
         return user;
       } else {
-        throw new AuthenticationError("Action not allowed");
+        throw new Error("Action not allowed");
       }
     },
   },

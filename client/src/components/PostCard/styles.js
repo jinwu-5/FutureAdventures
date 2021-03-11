@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
   overlay: {
     position: "absolute",
-    top: "57%",
+    top: "65%",
     left: "84%",
   },
 }));

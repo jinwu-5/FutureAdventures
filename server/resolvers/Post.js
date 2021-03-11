@@ -1,5 +1,4 @@
 import Post from "../models/Post.js";
-import { AuthenticationError } from "apollo-server-express";
 import { authUser } from "../utils/auth.js";
 
 const postResolvers = {
@@ -52,7 +51,7 @@ const postResolvers = {
           await post.deleteOne({ _id: postId });
           return "Post deleted successfully";
         } else {
-          throw new AuthenticationError("Action not allowed");
+          throw new Error("Action not allowed");
         }
       } catch (err) {
         throw err;
@@ -69,7 +68,7 @@ const postResolvers = {
           await post.updateOne({ content });
           return post;
         } else {
-          throw new AuthenticationError("Action not allowed");
+          throw new Error("Action not allowed");
         }
       } catch (err) {
         throw err;

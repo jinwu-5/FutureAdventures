@@ -1,7 +1,7 @@
 {
   "name": "movie-sharing",
   "version": "1.0.0",
-  "description": "A social media app built with MERN stack and GraphQL",
+  "description": "A social media app built with MERN stack and Apollo GraphQL",
   "main": "index.js",
   "type": "module",
   "scripts": {

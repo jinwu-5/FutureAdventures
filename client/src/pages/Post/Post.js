@@ -5,6 +5,7 @@ import {
   Button,
   Container,
   CssBaseline,
+  TextareaAutosize,
 } from "@material-ui/core";
 import useStyles from "./styles";
 import CREATE_POST from "../../graphql/CreatePost";
@@ -38,6 +39,11 @@ const Post = () => {
       return;
     }
 
+    if (title.length > 20) {
+      setError("Title should be less than 20 characters");
+      return;
+    }
+
     setError("");
     try {
       await createPost({
@@ -54,7 +60,7 @@ const Post = () => {
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-          Sharing a moment
+          Sharing a future adventure
         </Typography>
         <form noValidate className={classes.form} onSubmit={handleFormSubmit}>
           <TextField
@@ -68,13 +74,12 @@ const Post = () => {
             onChange={handleInputChange}
             value={title}
           />
-          <TextField
+          <TextareaAutosize
             variant="outlined"
             margin="normal"
             name="content"
             label="content"
-            required
-            fullWidth
+            placeholder="content"
             onChange={handleInputChange}
             value={content}
           />

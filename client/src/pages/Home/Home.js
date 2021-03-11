@@ -21,7 +21,7 @@ function Home() {
       <Grid>
         <Container component="main" className={classes.title}>
           <Typography component="h1" variant="h2" align="center">
-            Share Your Moments
+            Future Adventures
           </Typography>
         </Container>
         <Grid

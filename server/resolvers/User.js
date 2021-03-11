@@ -1,6 +1,5 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
-import { UserInputError, AuthenticationError } from "apollo-server-express";
 import { generateToken } from "../utils/auth.js";
 
 const userResolvers = {
@@ -32,7 +31,7 @@ const userResolvers = {
       try {
         const existingUser = await User.findOne({ username });
         if (existingUser) {
-          throw new UserInputError("Username already exists.");
+          throw new Error("Username already exists.");
         }
 
         const hashedPassword = await bcrypt.hash(password, 12);
@@ -60,12 +59,12 @@ const userResolvers = {
     login: async (_, { username, password }) => {
       const user = await User.findOne({ username });
       if (!user) {
-        throw new AuthenticationError("User not found!");
+        throw new Error("User not found!");
       }
 
       const checkPassword = await bcrypt.compare(password, user.password);
       if (!checkPassword) {
-        throw new AuthenticationError("Incorrect login information!");
+        throw new Error("Incorrect login information!");
       }
 
       const authToken = generateToken(user);

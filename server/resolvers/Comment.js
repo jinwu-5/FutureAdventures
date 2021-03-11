@@ -1,5 +1,4 @@
 import Post from "../models/Post.js";
-import { AuthenticationError } from "apollo-server-express";
 import { authUser } from "../utils/auth.js";
 
 const commentResolvers = {
@@ -44,7 +43,7 @@ const commentResolvers = {
           await post.save();
           return post;
         } else {
-          throw new AuthenticationError("Action not allowed");
+          throw new Error("Action not allowed");
         }
       } catch (err) {
         throw err;
@@ -70,7 +69,7 @@ const commentResolvers = {
           await post.save();
           return post;
         } else {
-          throw new AuthenticationError("Action not allowed");
+          throw new Error("Action not allowed");
         }
       } catch (err) {
         throw err;
