@@ -9,7 +9,6 @@ import {
   Collapse,
   Link,
 } from "@material-ui/core";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import useStyles from "./styles";
 import CommentIcon from "@material-ui/icons/Comment";
 import moment from "moment";
@@ -17,6 +16,7 @@ import clsx from "clsx";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import PostLikeButton from "../LikeButton/LikeButton";
 import { StoreContext } from "../../store/store";
+import OptionButton from "../OptionButton/OptionButton";
 
 const PostCard = ({
   post: {
@@ -57,7 +57,6 @@ const PostCard = ({
         >
           {title}
         </Typography>
-
         <Typography
           variant="body2"
           color="textSecondary"
@@ -75,7 +74,7 @@ const PostCard = ({
           {moment(dateCreated).fromNow()}
         </Typography>
         <IconButton aria-label="settings" className={classes.overlay}>
-          <MoreVertIcon />
+          <OptionButton user={user} post={{ id, username }} />
         </IconButton>
       </CardContent>
       <CardActions disableSpacing>
@@ -93,7 +92,6 @@ const PostCard = ({
         <Typography variant="body2" color="textSecondary">
           {commentCount}
         </Typography>
-
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
