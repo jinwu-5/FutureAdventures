@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Card,
   CardMedia,
@@ -7,26 +7,31 @@ import {
   IconButton,
   Typography,
   Collapse,
+  Link,
 } from "@material-ui/core";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import useStyles from "./styles";
 import CommentIcon from "@material-ui/icons/Comment";
 import moment from "moment";
 import clsx from "clsx";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import PostLikeButton from "../LikeButton/LikeButton";
+import { StoreContext } from "../../store/store";
 
 const PostCard = ({
   post: {
+    id,
     imageUrl,
     title,
     content,
     dateCreated,
     username,
+    postLikes,
     postLikeCount,
     commentCount,
   },
 }) => {
+  const { user } = useContext(StoreContext);
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -74,18 +79,21 @@ const PostCard = ({
         </IconButton>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="like">
-          <FavoriteIcon />
-        </IconButton>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <PostLikeButton user={user} post={{ id, postLikes, postLikeCount }} />
+        <Typography variant="body2" color="textSecondary">
           {postLikeCount}
         </Typography>
-        <IconButton aria-label="comment" className={classes.comment}>
-          <CommentIcon />
+        <IconButton
+          href={`/posts/${id}`}
+          className={classes.comment}
+          component={Link}
+        >
+          <CommentIcon color="disabled" />
         </IconButton>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography variant="body2" color="textSecondary">
           {commentCount}
         </Typography>
+
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,

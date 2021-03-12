@@ -81,6 +81,7 @@ const Post = () => {
             label="content"
             placeholder="content"
             onChange={handleInputChange}
+            rowsMin={6}
             value={content}
           />
           <TextField
@@ -88,6 +89,7 @@ const Post = () => {
             margin="normal"
             name="imageUrl"
             label="imageUrl"
+            size="small"
             required
             fullWidth
             onChange={handleInputChange}
