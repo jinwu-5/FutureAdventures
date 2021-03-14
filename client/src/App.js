@@ -6,6 +6,7 @@ import Home from "./pages/Home/Home";
 import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
 import Post from "./pages/Post/Post";
+import Comment from "./pages/Comment/Comment";
 import { StoreProvider } from "./store/store";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/login" component={SignIn} />
           <Route exact path="/register" component={SignUp} />
           <Route exact path="/post" component={Post} />
+          <Route exact path="/posts/:postId" component={Comment} />
         </Container>
       </Router>
     </StoreProvider>
