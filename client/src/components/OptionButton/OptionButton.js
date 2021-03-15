@@ -14,9 +14,7 @@ const OptionButton = ({ user, post: { id, username } }) => {
   const handleClose = () => {
     setAction(null);
   };
-  //   {
-  //     user && user.username === username && <OptionButton postId={id} />;
-  //   }
+
   const [deletePost] = useMutation(DELETE_POST);
 
   const DeletePost = async () => {

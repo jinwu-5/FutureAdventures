@@ -18,6 +18,7 @@ import moment from "moment";
 import { StoreContext } from "../../store/store";
 import PostLikeButton from "../../components/LikeButton/LikeButton";
 import OptionButton from "../../components/OptionButton/OptionButton";
+import DeleteCommentButton from "../../components/OptionButton/DeleteComment";
 import { useMutation } from "@apollo/client";
 
 function CommentPage(props) {
@@ -170,7 +171,7 @@ function CommentPage(props) {
               component="h2"
               className={classes.date}
             >
-              {moment(comment.createdAt).fromNow()}
+              {moment(comment.dateCreated).fromNow()}
             </Typography>
             <Typography
               variant="body2"
@@ -180,6 +181,11 @@ function CommentPage(props) {
             >
               {comment.content}
             </Typography>
+            <IconButton aria-label="settings">
+              {user && (
+                <DeleteCommentButton postId={id} commentId={comment.id} />
+              )}
+            </IconButton>
           </Card>
         ))}
       </div>
