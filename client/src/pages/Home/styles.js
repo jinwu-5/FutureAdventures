@@ -5,7 +5,6 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 15,
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
     padding: "10px 50px",
   },

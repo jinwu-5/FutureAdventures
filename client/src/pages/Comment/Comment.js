@@ -44,6 +44,7 @@ function CommentPage(props) {
       await createComment({
         variables: { postId, content: comment },
       });
+      setComment("");
     } catch (error) {
       console.error(error);
     }
@@ -81,7 +82,7 @@ function CommentPage(props) {
               className={classes.media}
               image={
                 imageUrl ||
-                "https://images.unsplash.com/photo-1507668077129-56e32842fceb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjJ8fHF1ZXN0aW9ufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
+                "https://images.unsplash.com/photo-1484069560501-87d72b0c3669?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8cXVlc3Rpb258ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
               }
             />
 
@@ -113,89 +114,87 @@ function CommentPage(props) {
               <PostLikeButton
                 user={user}
                 post={{ id, postLikes, postLikeCount }}
+                className={classes.like}
               />
               <Typography variant="body2" color="textSecondary">
                 {postLikeCount}
               </Typography>
-              <IconButton aria-label="settings">
-                <OptionButton
-                  user={user}
-                  post={{ id, username }}
-                  className={classes.optionButton}
-                />
+              <IconButton aria-label="settings" className={classes.overlay}>
+                <OptionButton user={user} post={{ id, username }} />
               </IconButton>
             </CardActions>
           </CardContent>
         </Card>
         {user && (
           <Card className={classes.root}>
-            <form>
-              <div>
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  label="Post a comment"
-                  name="comment"
-                  required
-                  fullWidth
-                  autoFocus
-                  onChange={(event) => setComment(event.target.value)}
-                  value={comment}
-                />
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  disabled={comment.trim() === ""}
-                  onClick={handleCommentSubmit}
-                  className={classes.submitButton}
-                >
-                  Submit
-                </Button>
-              </div>
-            </form>
+            <CardContent>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                label="Post a comment"
+                name="comment"
+                required
+                fullWidth
+                autoFocus
+                onChange={(event) => setComment(event.target.value)}
+                value={comment}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={comment.trim() === ""}
+                onClick={handleCommentSubmit}
+              >
+                Submit
+              </Button>
+            </CardContent>
           </Card>
         )}
         {comments.map((comment) => (
           <Card className={classes.root} key={comment.id}>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="h2"
-              className={classes.username}
-            >
-              {comment.username}
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="h2"
-              className={classes.date}
-            >
-              {moment(comment.dateCreated).fromNow()}
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="h2"
-              className={classes.commentContent}
-            >
-              {comment.content}
-            </Typography>
-            <CommentLikeButton
-              user={user}
-              postId={id}
-              commentId={comment.id}
-              comment={comment}
-            />
-            <Typography variant="body2" color="textSecondary">
-              {comment.commentLikeCount}
-            </Typography>
-            <IconButton aria-label="settings">
-              {user && (
-                <DeleteCommentButton postId={id} commentId={comment.id} />
-              )}
-            </IconButton>
+            <CardContent>
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="h2"
+                className={classes.username}
+              >
+                {comment.username}
+              </Typography>
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="h2"
+                className={classes.date}
+              >
+                {moment(comment.dateCreated).fromNow()}
+              </Typography>
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="h2"
+                className={classes.commentContent}
+              >
+                {comment.content}
+              </Typography>
+              <CardActions>
+                <CommentLikeButton
+                  user={user}
+                  postId={id}
+                  commentId={comment.id}
+                  comment={comment}
+                />
+                <Typography variant="body2" color="textSecondary">
+                  {comment.commentLikeCount}
+                </Typography>
+                <IconButton aria-label="settings">
+                  {user && user.username === comment.username && (
+                    <DeleteCommentButton postId={id} commentId={comment.id} />
+                  )}
+                </IconButton>
+              </CardActions>
+            </CardContent>
           </Card>
         ))}
       </div>

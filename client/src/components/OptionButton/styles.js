@@ -9,6 +9,10 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     minWidth: 120,
   },
+  error: {
+    width: "100%",
+    "& > * + *": {},
+  },
 }));
 
 export default useStyles;

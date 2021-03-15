@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { MenuItem, Menu, Link } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import DELETE_POST from "../../graphql/DeletePost";
 import { useMutation } from "@apollo/client";
+import { Alert } from "@material-ui/lab";
+import useStyles from "./styles";
 
 const OptionButton = ({ user, post: { id, username } }) => {
   const [action, setAction] = React.useState(null);
+  const [error, setError] = useState("");
+  const classes = useStyles();
 
   const handleClick = (event) => {
     setAction(event.currentTarget);
@@ -24,7 +28,7 @@ const OptionButton = ({ user, post: { id, username } }) => {
       });
       window.location.assign("/");
     } catch (error) {
-      console.error(error);
+      setError(error.graphQLErrors[0].message);
     }
   };
 
@@ -44,8 +48,13 @@ const OptionButton = ({ user, post: { id, username } }) => {
           onClose={handleClose}
         >
           <MenuItem onClick={DeletePost}>Delete post</MenuItem>
-          <MenuItem onClick={handleClose}>Update content</MenuItem>
-          <MenuItem onClick={handleClose}>Follow {username}</MenuItem>
+          {/* <MenuItem onClick={handleClose}>Update content</MenuItem>
+          <MenuItem onClick={handleClose}>Follow {username}</MenuItem> */}
+          {error && (
+            <Alert severity="error" className={classes.error}>
+              {error}
+            </Alert>
+          )}
         </Menu>
       ) : (
         <Menu
@@ -58,12 +67,12 @@ const OptionButton = ({ user, post: { id, username } }) => {
           <MenuItem href="/login" component={Link} color="disabled">
             Delete post
           </MenuItem>
-          <MenuItem href="/login" component={Link} color="disabled">
+          {/* <MenuItem href="/login" component={Link} color="disabled">
             Update content
           </MenuItem>
           <MenuItem href="/login" component={Link} color="disabled">
             Follow {username}
-          </MenuItem>
+          </MenuItem> */}
         </Menu>
       )}
     </div>
