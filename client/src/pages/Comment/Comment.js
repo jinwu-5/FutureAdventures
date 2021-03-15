@@ -1,18 +1,24 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useQuery } from "@apollo/client";
 import GET_POST from "../../graphql/GetPost";
+import CREATE_COMMENT from "../../graphql/CreateComment";
 import {
   CircularProgress,
   Typography,
   Card,
+  TextField,
+  Button,
   CardMedia,
   CardContent,
   CardActions,
+  IconButton,
 } from "@material-ui/core";
 import useStyles from "./styles";
 import moment from "moment";
 import { StoreContext } from "../../store/store";
 import PostLikeButton from "../../components/LikeButton/LikeButton";
+import OptionButton from "../../components/OptionButton/OptionButton";
+import { useMutation } from "@apollo/client";
 
 function CommentPage(props) {
   const classes = useStyles();
@@ -26,6 +32,20 @@ function CommentPage(props) {
       postId,
     },
   });
+
+  const [comment, setComment] = useState("");
+
+  const [createComment] = useMutation(CREATE_COMMENT);
+
+  const handleCommentSubmit = async (event) => {
+    try {
+      await createComment({
+        variables: { postId, content: comment },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   let postAndComment;
   if (loading) {
@@ -95,9 +115,45 @@ function CommentPage(props) {
               <Typography variant="body2" color="textSecondary">
                 {postLikeCount}
               </Typography>
+              <IconButton aria-label="settings">
+                <OptionButton
+                  user={user}
+                  post={{ id, username }}
+                  className={classes.optionButton}
+                />
+              </IconButton>
             </CardActions>
           </CardContent>
         </Card>
+        {user && (
+          <Card className={classes.root}>
+            <form>
+              <div>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  label="Post a comment"
+                  name="comment"
+                  required
+                  fullWidth
+                  autoFocus
+                  onChange={(event) => setComment(event.target.value)}
+                  value={comment}
+                />
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={comment.trim() === ""}
+                  onClick={handleCommentSubmit}
+                  className={classes.submitButton}
+                >
+                  Submit
+                </Button>
+              </div>
+            </form>
+          </Card>
+        )}
         {comments.map((comment) => (
           <Card className={classes.root} key={comment.id}>
             <Typography

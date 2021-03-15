@@ -28,6 +28,12 @@ const useStyles = makeStyles((theme) => ({
   commentContent: {
     marginTop: "2%",
   },
+  optionButton: {
+    marginLeft: "auto",
+  },
+  submitButton: {
+    marginLeft: "auto",
+  },
 }));
 
 export default useStyles;
