@@ -16,7 +16,8 @@ import {
 import useStyles from "./styles";
 import moment from "moment";
 import { StoreContext } from "../../store/store";
-import PostLikeButton from "../../components/LikeButton/LikeButton";
+import PostLikeButton from "../../components/LikeButton/PostLikeButton";
+import CommentLikeButton from "../../components/LikeButton/CommentLikeButton";
 import OptionButton from "../../components/OptionButton/OptionButton";
 import DeleteCommentButton from "../../components/OptionButton/DeleteComment";
 import { useMutation } from "@apollo/client";
@@ -180,6 +181,15 @@ function CommentPage(props) {
               className={classes.commentContent}
             >
               {comment.content}
+            </Typography>
+            <CommentLikeButton
+              user={user}
+              postId={id}
+              commentId={comment.id}
+              comment={comment}
+            />
+            <Typography variant="body2" color="textSecondary">
+              {comment.commentLikeCount}
             </Typography>
             <IconButton aria-label="settings">
               {user && (

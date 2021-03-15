@@ -14,7 +14,7 @@ import CommentIcon from "@material-ui/icons/Comment";
 import moment from "moment";
 import clsx from "clsx";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import PostLikeButton from "../LikeButton/LikeButton";
+import PostLikeButton from "../LikeButton/PostLikeButton";
 import { StoreContext } from "../../store/store";
 import OptionButton from "../OptionButton/OptionButton";
 
