@@ -17,6 +17,8 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req }) => ({ req }),
+  introspection: true,
+  playground: true,
 });
 
 server.applyMiddleware({ app });
@@ -27,12 +29,11 @@ app.listen(PORT, () => {
 
 // connect to MongoDB
 
-mongoose.connect(
-  MONGODB,
-  {
+mongoose
+  .connect(MONGODB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
-  },
-  () => console.log("Connected to the db")
-);
+  })
+  .then(() => console.log("Connected to the db"))
+  .catch((error) => console.log(error.message));

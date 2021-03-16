@@ -23,6 +23,10 @@ function Home() {
           <Typography component="h1" variant="h2" align="center">
             Future Adventures
           </Typography>
+          <Typography component="h1" variant="h5" align="center">
+            This is a space for people to share the adventurous stuff that they
+            want to try in the future.
+          </Typography>
         </Container>
         <Grid
           className={classes.container}
