@@ -24,8 +24,7 @@ function Home() {
             Future Adventures
           </Typography>
           <Typography component="h1" variant="h5" align="center">
-            This is a space for people to share the adventurous stuff that they
-            want to try in the future.
+            A space for people to share their potential future endeavors
           </Typography>
         </Container>
         <Grid

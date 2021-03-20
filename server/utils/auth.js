@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 import { SECRET_KEY } from "../config.js";
-import { AuthenticationError } from "apollo-server-express";
 
 //  Generate authenticaiton token
 
@@ -27,7 +26,7 @@ const authUser = (context) => {
         const user = jwt.verify(token, SECRET_KEY);
         return user;
       } catch (err) {
-        throw new AuthenticationError("Invalid token");
+        throw new Error("Invalid token");
       }
     }
     throw new Error(
