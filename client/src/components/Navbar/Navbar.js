@@ -25,7 +25,7 @@ function MenuAppBar() {
             Post
           </Button>
 
-          <Button color="inherit" component={Link} onClick={context.logout}>
+          <Button color="inherit" onClick={context.logout}>
             Logout
           </Button>
         </Toolbar>

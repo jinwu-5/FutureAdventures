@@ -15,7 +15,6 @@ import {
   IconButton,
   Typography,
   Collapse,
-  Link,
 } from "@material-ui/core";
 
 const PostCard = ({
@@ -43,8 +42,6 @@ const PostCard = ({
     <Card className={classes.root}>
       <CardMedia
         className={classes.media}
-        href={`/posts/${id}`}
-        component={Link}
         image={
           imageUrl ||
           "https://images.unsplash.com/photo-1484069560501-87d72b0c3669?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8cXVlc3Rpb258ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
@@ -77,7 +74,6 @@ const PostCard = ({
         >
           {moment(dateCreated).fromNow()}
         </Typography>
-
         <IconButton aria-label="settings" className={classes.overlay}>
           <OptionButton user={user} post={{ id, username }} />
         </IconButton>
@@ -89,11 +85,7 @@ const PostCard = ({
           {postLikeCount}
         </Typography>
 
-        <IconButton
-          href={`/posts/${id}`}
-          className={classes.comment}
-          component={Link}
-        >
+        <IconButton href={`/posts/${id}`} className={classes.comment}>
           <CommentIcon color="disabled" />
         </IconButton>
 

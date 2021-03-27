@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import LIKE_POST from "../../graphql/Post/LikePost";
 import useStyles from "./styles";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import { IconButton, Link, CardActions } from "@material-ui/core";
+import { IconButton, CardActions } from "@material-ui/core";
 
 function PostLikeButton({ user, post: { id, postLikes } }) {
   const [liked, setLiked] = useState(false);
@@ -30,7 +30,7 @@ function PostLikeButton({ user, post: { id, postLikes } }) {
       </IconButton>
     )
   ) : (
-    <IconButton aria-label="like" href="/login" component={Link}>
+    <IconButton aria-label="like" href="/login">
       <FavoriteIcon color="disabled" />
     </IconButton>
   );
