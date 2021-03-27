@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import GET_POSTS from "../../graphql/GetPosts";
+import GET_POSTS from "../../graphql/Post/GetPosts";
 import useStyles from "./styles";
 import PostCard from "../../components/PostCard/PostCard";
 import {

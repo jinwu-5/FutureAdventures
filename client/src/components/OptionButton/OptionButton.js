@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { MenuItem, Menu, Link } from "@material-ui/core";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import DELETE_POST from "../../graphql/DeletePost";
 import { useMutation } from "@apollo/client";
-import { Alert } from "@material-ui/lab";
+import DELETE_POST from "../../graphql/Post/DeletePost";
 import useStyles from "./styles";
+import { Alert } from "@material-ui/lab";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { MenuItem, Menu, Link } from "@material-ui/core";
 
 const OptionButton = ({ user, post: { id, username } }) => {
   const [action, setAction] = React.useState(null);

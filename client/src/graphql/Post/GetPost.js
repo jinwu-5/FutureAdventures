@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
-const LIKE_POST = gql`
-  mutation likePost($postId: ID!) {
-    likePost(postId: $postId) {
+const GET_POST = gql`
+  query getPost($postId: ID!) {
+    getPost(postId: $postId) {
       id
       imageUrl
       title
@@ -27,9 +27,8 @@ const LIKE_POST = gql`
         }
         commentLikeCount
       }
-      commentCount
     }
   }
 `;
 
-export default LIKE_POST;
+export default GET_POST;

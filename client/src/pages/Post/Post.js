@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import useStyles from "./styles";
-import CREATE_POST from "../../graphql/CreatePost";
+import CREATE_POST from "../../graphql/Post/CreatePost";
 import { Alert } from "@material-ui/lab";
 import {
   Typography,

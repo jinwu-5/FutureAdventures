@@ -1,4 +1,12 @@
 import React, { useContext } from "react";
+import { StoreContext } from "../../store/store";
+import useStyles from "./styles";
+import moment from "moment";
+import clsx from "clsx";
+import OptionButton from "../OptionButton/OptionButton";
+import CommentIcon from "@material-ui/icons/Comment";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import PostLikeButton from "../LikeButton/PostLikeButton";
 import {
   Card,
   CardMedia,
@@ -9,14 +17,6 @@ import {
   Collapse,
   Link,
 } from "@material-ui/core";
-import useStyles from "./styles";
-import CommentIcon from "@material-ui/icons/Comment";
-import moment from "moment";
-import clsx from "clsx";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import PostLikeButton from "../LikeButton/PostLikeButton";
-import { StoreContext } from "../../store/store";
-import OptionButton from "../OptionButton/OptionButton";
 
 const PostCard = ({
   post: {
@@ -77,15 +77,18 @@ const PostCard = ({
         >
           {moment(dateCreated).fromNow()}
         </Typography>
+
         <IconButton aria-label="settings" className={classes.overlay}>
           <OptionButton user={user} post={{ id, username }} />
         </IconButton>
       </CardContent>
       <CardActions disableSpacing>
         <PostLikeButton user={user} post={{ id, postLikes, postLikeCount }} />
+
         <Typography variant="body2" color="textSecondary">
           {postLikeCount}
         </Typography>
+
         <IconButton
           href={`/posts/${id}`}
           className={classes.comment}
@@ -93,9 +96,11 @@ const PostCard = ({
         >
           <CommentIcon color="disabled" />
         </IconButton>
+
         <Typography variant="body2" color="textSecondary">
           {commentCount}
         </Typography>
+
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
@@ -107,6 +112,7 @@ const PostCard = ({
           <ExpandMoreIcon />
         </IconButton>
       </CardActions>
+
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography

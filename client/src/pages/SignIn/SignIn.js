@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useMutation } from "@apollo/client";
 import useStyles from "./styles";
-import LOGIN from "../../graphql/SignIn";
+import LOGIN from "../../graphql/User/SignIn";
 import { StoreContext } from "../../store/store";
 import { Alert } from "@material-ui/lab";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";

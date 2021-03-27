@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
-import { IconButton, Link, CardActions } from "@material-ui/core";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import LIKE_COMMENT from "../../graphql/LikeComment";
+import LIKE_COMMENT from "../../graphql/Comment/LikeComment";
 import useStyles from "./styles";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import { IconButton, Link, CardActions } from "@material-ui/core";
 
 function CommentLikeButton({ user, postId, commentId, comment }) {
   const [liked, setLiked] = useState(false);
   const classes = useStyles();
+
   useEffect(() => {
     if (
       user &&
