@@ -1,27 +1,26 @@
 import React, { useState, useContext } from "react";
+import { useMutation } from "@apollo/client";
+import useStyles from "./styles";
+import LOGIN from "../../graphql/SignIn";
+import { StoreContext } from "../../store/store";
+import { Alert } from "@material-ui/lab";
+import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import {
   Avatar,
   Button,
   CssBaseline,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Link,
   Paper,
   Grid,
   Typography,
 } from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import useStyles from "./styles";
-import LOGIN from "../../graphql/SignIn";
-import { useMutation } from "@apollo/client";
-import { Alert } from "@material-ui/lab";
-import { StoreContext } from "../../store/store";
 
 const SignInForm = () => {
   const context = useContext(StoreContext);
   const classes = useStyles();
   const [error, setError] = useState("");
+
   const [userFormData, setUserFormData] = useState({
     username: "",
     password: "",
@@ -62,14 +61,17 @@ const SignInForm = () => {
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
+
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
+            <PersonOutlineIcon />
           </Avatar>
+
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+
           <form className={classes.form} noValidate onSubmit={handleFormSubmit}>
             <TextField
               variant="outlined"
@@ -82,6 +84,7 @@ const SignInForm = () => {
               onChange={handleInputChange}
               value={username}
             />
+
             <TextField
               variant="outlined"
               margin="normal"
@@ -93,10 +96,7 @@ const SignInForm = () => {
               onChange={handleInputChange}
               value={password}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+
             <Button
               type="submit"
               fullWidth
@@ -106,11 +106,13 @@ const SignInForm = () => {
             >
               Sign In
             </Button>
+
             {error && (
               <Alert severity="error" className={classes.error}>
                 {error}
               </Alert>
             )}
+
             <Grid container justify="center">
               <Grid item>
                 <Link href="/Register" variant="body2">

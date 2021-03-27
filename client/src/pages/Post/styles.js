@@ -11,16 +11,11 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     marginTop: theme.spacing(3),
   },
-  fileInput: {
-    width: "97%",
-    margin: "10px 0",
-  },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
   error: {
-    width: "100%",
-    "& > * + *": {},
+    marginTop: "3%",
   },
 }));
 

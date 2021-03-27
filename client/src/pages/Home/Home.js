@@ -1,17 +1,18 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import PostCard from "../../components/PostCard/PostCard";
 import GET_POSTS from "../../graphql/GetPosts";
+import useStyles from "./styles";
+import PostCard from "../../components/PostCard/PostCard";
 import {
   Grid,
   CircularProgress,
   Typography,
   Container,
 } from "@material-ui/core";
-import useStyles from "./styles";
 
 function Home() {
   const { loading, data: { getPosts: posts } = {} } = useQuery(GET_POSTS);
+
   const classes = useStyles();
 
   return loading ? (
@@ -23,10 +24,12 @@ function Home() {
           <Typography component="h1" variant="h2" align="center">
             Future Adventures
           </Typography>
+
           <Typography component="h1" variant="h5" align="center">
             A space for people to share their potential future endeavors
           </Typography>
         </Container>
+
         <Grid
           className={classes.container}
           container

@@ -1,16 +1,15 @@
 import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import useStyles from "./styles";
+import CREATE_POST from "../../graphql/CreatePost";
+import { Alert } from "@material-ui/lab";
 import {
   Typography,
   TextField,
   Button,
   Container,
   CssBaseline,
-  TextareaAutosize,
 } from "@material-ui/core";
-import useStyles from "./styles";
-import CREATE_POST from "../../graphql/CreatePost";
-import { useMutation } from "@apollo/client";
-import { Alert } from "@material-ui/lab";
 
 const Post = () => {
   const classes = useStyles();
@@ -20,7 +19,7 @@ const Post = () => {
     content: "",
     imageUrl: "",
   });
-  // const [selectedFile, setSelectedFile] = useState("");
+
   const [error, setError] = useState("");
 
   const { title, content, imageUrl } = postFormData;
@@ -34,13 +33,9 @@ const Post = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+
     if (!title || !content) {
       setError("Title and content are required");
-      return;
-    }
-
-    if (title.length > 20) {
-      setError("Title should be less than 20 characters");
       return;
     }
 
@@ -56,34 +51,39 @@ const Post = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="sm">
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
           Sharing a future adventure
         </Typography>
+
         <form noValidate className={classes.form} onSubmit={handleFormSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
             label="title"
             name="title"
+            autoFocus
             required
             fullWidth
-            autoFocus
             onChange={handleInputChange}
             value={title}
           />
-          <TextareaAutosize
+
+          <TextField
             variant="outlined"
             margin="normal"
-            name="content"
             label="content"
-            placeholder="content"
+            name="content"
+            required
+            fullWidth
+            multiline="true"
+            rows="12"
             onChange={handleInputChange}
-            rowsMin={6}
             value={content}
           />
+
           <TextField
             variant="outlined"
             margin="normal"
@@ -95,6 +95,7 @@ const Post = () => {
             onChange={handleInputChange}
             value={imageUrl}
           />
+
           <Button
             type="submit"
             fullWidth
@@ -104,6 +105,7 @@ const Post = () => {
           >
             submit
           </Button>
+
           {error && (
             <Alert severity="error" className={classes.error}>
               {error}

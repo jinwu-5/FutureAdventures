@@ -1,6 +1,6 @@
 # Future Adventures
 
-Future Adventures is a social media platform where users can share and edit photos & messages with others. I'm currently working on features include: updating post/comment, follow users, uploading files and overall aesthetics.
+A social media platform for users to share their potential future endeavors and connect with others.
 
 #### Home Page:
 
@@ -8,7 +8,7 @@ Future Adventures is a social media platform where users can share and edit phot
 
 Backend Demo: [https://future-adventure.herokuapp.com/graphql](https://future-adventure.herokuapp.com/graphql)
 
-![Home Page](/client/public/Image/FutureAdventures.jpg)
+![Home Page](/client/public/image/futureAdventures.jpg)
 
 ## Development
 
@@ -22,7 +22,6 @@ Backend Demo: [https://future-adventure.herokuapp.com/graphql](https://future-ad
 **_Backend_**
 
 - GraphQL & Apollo Server for queries and mutations
-- Express.js for server config and RESTful API
 - MongoDB & Mongoose for database management
 - bcrypt for authentication
 - jsonwebtoken for generating web token

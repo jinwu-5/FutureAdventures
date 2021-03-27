@@ -1,7 +1,16 @@
 import React, { useContext, useState } from "react";
 import { useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
+import { StoreContext } from "../../store/store";
+import useStyles from "./styles";
 import GET_POST from "../../graphql/GetPost";
 import CREATE_COMMENT from "../../graphql/CreateComment";
+import moment from "moment";
+import PostLikeButton from "../../components/LikeButton/PostLikeButton";
+import CommentLikeButton from "../../components/LikeButton/CommentLikeButton";
+import OptionButton from "../../components/OptionButton/OptionButton";
+import DeleteCommentButton from "../../components/OptionButton/DeleteComment";
+
 import {
   CircularProgress,
   Typography,
@@ -13,14 +22,6 @@ import {
   CardActions,
   IconButton,
 } from "@material-ui/core";
-import useStyles from "./styles";
-import moment from "moment";
-import { StoreContext } from "../../store/store";
-import PostLikeButton from "../../components/LikeButton/PostLikeButton";
-import CommentLikeButton from "../../components/LikeButton/CommentLikeButton";
-import OptionButton from "../../components/OptionButton/OptionButton";
-import DeleteCommentButton from "../../components/OptionButton/DeleteComment";
-import { useMutation } from "@apollo/client";
 
 function CommentPage(props) {
   const classes = useStyles();
@@ -51,6 +52,7 @@ function CommentPage(props) {
   };
 
   let postAndComment;
+
   if (loading) {
     postAndComment = <CircularProgress />;
   } else {
@@ -72,12 +74,13 @@ function CommentPage(props) {
           <CardContent>
             <Typography
               gutterBottom
-              variant="h6"
+              variant="h5"
               component="h2"
               className={classes.title}
             >
               {title}
             </Typography>
+
             <CardMedia
               className={classes.media}
               image={
@@ -94,6 +97,7 @@ function CommentPage(props) {
             >
               {content}
             </Typography>
+
             <Typography
               variant="body2"
               color="textSecondary"
@@ -110,21 +114,25 @@ function CommentPage(props) {
             >
               {moment(dateCreated).fromNow()}
             </Typography>
+
             <CardActions>
               <PostLikeButton
                 user={user}
                 post={{ id, postLikes, postLikeCount }}
                 className={classes.like}
               />
+
               <Typography variant="body2" color="textSecondary">
                 {postLikeCount}
               </Typography>
+
               <IconButton aria-label="settings" className={classes.overlay}>
                 <OptionButton user={user} post={{ id, username }} />
               </IconButton>
             </CardActions>
           </CardContent>
         </Card>
+
         {user && (
           <Card className={classes.root}>
             <CardContent>
@@ -139,6 +147,7 @@ function CommentPage(props) {
                 onChange={(event) => setComment(event.target.value)}
                 value={comment}
               />
+
               <Button
                 type="submit"
                 variant="contained"
@@ -151,6 +160,7 @@ function CommentPage(props) {
             </CardContent>
           </Card>
         )}
+
         {comments.map((comment) => (
           <Card className={classes.root} key={comment.id}>
             <CardContent>
@@ -162,6 +172,7 @@ function CommentPage(props) {
               >
                 {comment.username}
               </Typography>
+
               <Typography
                 variant="body2"
                 color="textSecondary"
@@ -170,6 +181,7 @@ function CommentPage(props) {
               >
                 {moment(comment.dateCreated).fromNow()}
               </Typography>
+
               <Typography
                 variant="body2"
                 color="textSecondary"
@@ -178,6 +190,7 @@ function CommentPage(props) {
               >
                 {comment.content}
               </Typography>
+
               <CardActions>
                 <CommentLikeButton
                   user={user}
@@ -185,9 +198,11 @@ function CommentPage(props) {
                   commentId={comment.id}
                   comment={comment}
                 />
+
                 <Typography variant="body2" color="textSecondary">
                   {comment.commentLikeCount}
                 </Typography>
+
                 <IconButton aria-label="settings">
                   {user && user.username === comment.username && (
                     <DeleteCommentButton postId={id} commentId={comment.id} />
@@ -200,7 +215,6 @@ function CommentPage(props) {
       </div>
     );
   }
-
   return postAndComment;
 }
 

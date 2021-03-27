@@ -6,8 +6,18 @@ const GET_USERS = gql`
       id
       username
       email
-      followerCount
+      followers {
+        id
+        username
+      }
+      following {
+        id
+        username
+      }
       followingCount
+      followerCount
+      dateCreated
+      authToken
     }
   }
 `;
