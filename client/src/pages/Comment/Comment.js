@@ -23,7 +23,7 @@ import {
   IconButton,
 } from "@material-ui/core";
 
-function CommentPage(props) {
+const CommentPage = (props) => {
   const classes = useStyles();
 
   const postId = props.match.params.postId;
@@ -223,6 +223,6 @@ function CommentPage(props) {
     );
   }
   return postAndComment;
-}
+};
 
 export default CommentPage;

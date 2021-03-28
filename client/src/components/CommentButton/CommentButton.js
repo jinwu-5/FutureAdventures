@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CommentIcon from "@material-ui/icons/Comment";
 import { CardActions } from "@material-ui/core";
 
-function CommentButton({ user, post: { comments } }) {
+const CommentButton = ({ user, post: { comments } }) => {
   const [commented, setCommented] = useState(false);
 
   useEffect(() => {
@@ -22,6 +22,6 @@ function CommentButton({ user, post: { comments } }) {
     );
 
   return <CardActions>{icon}</CardActions>;
-}
+};
 
 export default CommentButton;

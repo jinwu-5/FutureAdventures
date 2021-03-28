@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import "./App.css";
 import { Container } from "@material-ui/core";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
@@ -8,8 +7,9 @@ import SignUp from "./pages/SignUp/SignUp";
 import Post from "./pages/Post/Post";
 import Comment from "./pages/Comment/Comment";
 import { StoreProvider } from "./store/store";
+import "./App.css";
 
-function App() {
+const App = () => {
   return (
     <StoreProvider>
       <Router>
@@ -24,6 +24,6 @@ function App() {
       </Router>
     </StoreProvider>
   );
-}
+};
 
 export default App;

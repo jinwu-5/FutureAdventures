@@ -4,7 +4,7 @@ import LIKE_POST from "../../graphql/Post/LikePost";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { IconButton, CardActions } from "@material-ui/core";
 
-function PostLikeButton({ user, post: { id, postLikes } }) {
+const PostLikeButton = ({ user, post: { id, postLikes } }) => {
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {
@@ -34,6 +34,6 @@ function PostLikeButton({ user, post: { id, postLikes } }) {
   );
 
   return <CardActions>{likeButton}</CardActions>;
-}
+};
 
 export default PostLikeButton;

@@ -1,27 +1,35 @@
-import React, { useState } from "react";
+import { React, useState } from "react";
 import { useMutation } from "@apollo/client";
 import DELETE_POST from "../../graphql/Post/DeletePost";
 import useStyles from "./styles";
 import { Alert } from "@material-ui/lab";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { MenuItem, Menu } from "@material-ui/core";
+import {
+  MenuItem,
+  Menu,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+} from "@material-ui/core";
 
 const OptionButton = ({ user, post: { id, username } }) => {
-  const [action, setAction] = React.useState(null);
+  const [action, setAction] = useState(null);
+  const [open, setOpen] = useState(false);
   const [error, setError] = useState("");
   const classes = useStyles();
 
-  const handleClick = (event) => {
-    setAction(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAction(null);
-  };
-
   const [deletePost] = useMutation(DELETE_POST);
 
-  const DeletePost = async () => {
+  const handleConfirmOpen = () => {
+    setOpen(true);
+  };
+
+  const handleConfirmClose = () => {
+    setOpen(false);
+  };
+
+  const handleAgree = async () => {
     try {
       await deletePost({
         variables: { postId: id },
@@ -30,6 +38,15 @@ const OptionButton = ({ user, post: { id, username } }) => {
     } catch (error) {
       setError(error.graphQLErrors[0].message);
     }
+    handleConfirmClose();
+  };
+
+  const handleMenuClick = (event) => {
+    setAction(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAction(null);
   };
 
   return (
@@ -39,16 +56,37 @@ const OptionButton = ({ user, post: { id, username } }) => {
           <MoreVertIcon
             aria-controls="simple-menu"
             aria-haspopup="true"
-            onClick={handleClick}
+            onClick={handleMenuClick}
           />
+
           <Menu
             id="simple-menu"
             anchorEl={action}
             keepMounted
             open={Boolean(action)}
-            onClose={handleClose}
+            onClose={handleMenuClose}
           >
-            <MenuItem onClick={DeletePost}>Delete post</MenuItem>
+            <MenuItem onClick={handleConfirmOpen}>Delete post</MenuItem>
+            <Dialog
+              open={open}
+              onClose={handleConfirmClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">
+                {"This is a permanent action!"}
+              </DialogTitle>
+
+              <DialogActions>
+                <Button onClick={handleConfirmClose} color="primary">
+                  Disagree
+                </Button>
+
+                <Button onClick={handleAgree} color="primary" autoFocus>
+                  Agree
+                </Button>
+              </DialogActions>
+            </Dialog>
             {/* <MenuItem onClick={handleClose}>Update content</MenuItem>
           <MenuItem onClick={handleClose}>Follow {username}</MenuItem> */}
             {error && (

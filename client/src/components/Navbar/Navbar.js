@@ -5,7 +5,7 @@ import { useStyles, theme } from "./styles";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
 
-function MenuAppBar() {
+const MenuAppBar = () => {
   const classes = useStyles();
   const context = useContext(StoreContext);
 
@@ -60,6 +60,6 @@ function MenuAppBar() {
       </div>
     </ThemeProvider>
   );
-}
+};
 
 export default MenuAppBar;

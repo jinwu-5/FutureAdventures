@@ -81,7 +81,7 @@ const Post = () => {
               name="content"
               required
               fullWidth
-              multiline="true"
+              multiline
               rows="12"
               onChange={handleInputChange}
               value={content}

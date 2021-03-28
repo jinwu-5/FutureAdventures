@@ -9,6 +9,11 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     minWidth: 120,
   },
+  deleteButtonOverlay: {
+    position: "absolute",
+    top: "58%",
+    right: "3px",
+  },
 }));
 
 export default useStyles;

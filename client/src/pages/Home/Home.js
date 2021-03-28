@@ -11,7 +11,7 @@ import {
   Container,
 } from "@material-ui/core";
 
-function Home() {
+const Home = () => {
   const { loading, data: { getPosts: posts } = {} } = useQuery(GET_POSTS);
 
   const classes = useStyles();
@@ -48,6 +48,6 @@ function Home() {
       </ThemeProvider>
     )
   );
-}
+};
 
 export default Home;
