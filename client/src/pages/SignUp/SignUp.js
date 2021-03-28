@@ -5,10 +5,8 @@ import { theme } from "../SignIn/styles";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CREATE_USER from "../../graphql/User/SignUp";
 import { StoreContext } from "../../store/store";
-import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import { Alert } from "@material-ui/lab";
 import {
-  Avatar,
   Button,
   CssBaseline,
   TextField,
@@ -88,12 +86,8 @@ const SignUpForm = () => {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <PersonOutlineIcon />
-          </Avatar>
-
           <Typography component="h1" variant="h5">
-            Sign up
+            Register
           </Typography>
 
           <form className={classes.form} noValidate onSubmit={handleFormSubmit}>

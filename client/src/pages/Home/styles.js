@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 const theme = createMuiTheme({
   overrides: {
     MuiTypography: {
-      h2: {
+      h3: {
         fontFamily: "Cinzel Decorative, sans-serif",
       },
       h5: {

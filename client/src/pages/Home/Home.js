@@ -23,7 +23,7 @@ function Home() {
       <ThemeProvider theme={theme}>
         <Grid>
           <Container component="main" className={classes.title}>
-            <Typography component="h1" variant="h2" align="center">
+            <Typography component="h1" variant="h3" align="center">
               Future Adventures
             </Typography>
 

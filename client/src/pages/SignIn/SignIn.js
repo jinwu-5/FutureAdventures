@@ -5,9 +5,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import LOGIN from "../../graphql/User/SignIn";
 import { StoreContext } from "../../store/store";
 import { Alert } from "@material-ui/lab";
-import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import {
-  Avatar,
   Button,
   CssBaseline,
   TextField,
@@ -66,12 +64,8 @@ const SignInForm = () => {
 
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <PersonOutlineIcon />
-            </Avatar>
-
             <Typography component="h1" variant="h5">
-              Sign in
+              Login
             </Typography>
 
             <form

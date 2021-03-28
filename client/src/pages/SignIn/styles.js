@@ -49,7 +49,7 @@ const theme = createMuiTheme({
   overrides: {
     MuiTypography: {
       h5: {
-        fontFamily: "Raleway, sans-serif",
+        fontFamily: "Cinzel Decorative, sans-serif",
         color: "#F26B8A",
       },
     },
