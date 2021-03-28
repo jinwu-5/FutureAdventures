@@ -16,6 +16,18 @@ const GET_POSTS = gql`
       }
       postLikeCount
       commentCount
+      comments {
+        id
+        content
+        dateCreated
+        username
+        commentLikes {
+          id
+          username
+          dateCreated
+        }
+        commentLikeCount
+      }
     }
   }
 `;

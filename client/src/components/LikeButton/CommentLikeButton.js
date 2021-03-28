@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import LIKE_COMMENT from "../../graphql/Comment/LikeComment";
-import useStyles from "./styles";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { IconButton, CardActions } from "@material-ui/core";
 
 function CommentLikeButton({ user, postId, commentId, comment }) {
   const [liked, setLiked] = useState(false);
-  const classes = useStyles();
 
   useEffect(() => {
     if (
@@ -38,9 +36,7 @@ function CommentLikeButton({ user, postId, commentId, comment }) {
     </IconButton>
   );
 
-  return (
-    <CardActions className={classes.cardActions}>{likeButton}</CardActions>
-  );
+  return <CardActions>{likeButton}</CardActions>;
 }
 
 export default CommentLikeButton;

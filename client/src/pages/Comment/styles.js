@@ -89,7 +89,8 @@ const theme = createMuiTheme({
         fontFamily: "Raleway, sans-serif",
       },
       h5: {
-        fontFamily: "Raleway, sans-serif",
+        fontFamily: "Cinzel Decorative, sans-serif",
+        color: "#4791db",
       },
     },
   },

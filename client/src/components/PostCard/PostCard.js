@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { StoreContext } from "../../store/store";
 import { useStyles, theme } from "./styles";
 import { ThemeProvider } from "@material-ui/core/styles";
+import CommentButton from "../CommentButton/CommentButton";
 import moment from "moment";
 import clsx from "clsx";
 import OptionButton from "../OptionButton/OptionButton";
-import CommentIcon from "@material-ui/icons/Comment";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import PostLikeButton from "../LikeButton/PostLikeButton";
 import {
@@ -29,6 +29,7 @@ const PostCard = ({
     postLikes,
     postLikeCount,
     commentCount,
+    comments,
   },
 }) => {
   const { user } = useContext(StoreContext);
@@ -71,6 +72,7 @@ const PostCard = ({
           >
             {moment(dateCreated).fromNow()}
           </Typography>
+
           <IconButton aria-label="settings" className={classes.overlay}>
             <OptionButton user={user} post={{ id, username }} />
           </IconButton>
@@ -83,7 +85,7 @@ const PostCard = ({
           </Typography>
 
           <IconButton href={`/posts/${id}`} className={classes.comment}>
-            <CommentIcon color="disabled" />
+            <CommentButton user={user} post={{ comments }} />
           </IconButton>
 
           <Typography variant="body2" color="textSecondary">
