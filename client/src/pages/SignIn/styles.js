@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { createMuiTheme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: "#F26B8A",
   },
   form: {
     width: "100%",
@@ -36,4 +37,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default useStyles;
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#4791db",
+    },
+    secondary: {
+      main: "#F26B8A",
+    },
+  },
+  overrides: {
+    MuiTypography: {
+      h5: {
+        fontFamily: "Raleway, sans-serif",
+        color: "#F26B8A",
+      },
+    },
+  },
+});
+
+export { useStyles, theme };

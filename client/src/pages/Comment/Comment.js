@@ -110,9 +110,8 @@ function CommentPage(props) {
               />
 
               <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
+                variant="h6"
+                component="h2"
                 className={classes.content}
               >
                 {content}
@@ -158,7 +157,6 @@ function CommentPage(props) {
                   type="submit"
                   variant="contained"
                   color="primary"
-                  className={classes.submit}
                   disabled={comment.trim() === ""}
                   onClick={handleCommentSubmit}
                 >
@@ -190,8 +188,7 @@ function CommentPage(props) {
                 </Typography>
 
                 <Typography
-                  variant="body2"
-                  color="textSecondary"
+                  variant="h6"
                   component="h2"
                   className={classes.commentContent}
                 >

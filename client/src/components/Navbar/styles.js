@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { createMuiTheme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,4 +13,14 @@ const useStyles = makeStyles((theme) => ({
   button: {},
 }));
 
-export default useStyles;
+const theme = createMuiTheme({
+  overrides: {
+    MuiAppBar: {
+      colorPrimary: {
+        background: "linear-gradient(45deg, #008bff 0%, #FE6B8B 90%)",
+      },
+    },
+  },
+});
+
+export { useStyles, theme };

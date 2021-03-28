@@ -66,6 +66,19 @@ const theme = createMuiTheme({
         fontSize: "0",
       },
     },
+    MuiTypography: {
+      h6: {
+        fontFamily: "Raleway, sans-serif",
+      },
+    },
+  },
+  palette: {
+    primary: {
+      main: "#4791db",
+    },
+    secondary: {
+      main: "#F26B8A",
+    },
   },
 });
 

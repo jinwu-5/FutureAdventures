@@ -52,19 +52,13 @@ const PostCard = ({
           }
         />
         <CardContent>
-          <Typography
-            gutterBottom
-            variant="h6"
-            component="h2"
-            className={classes.title}
-          >
+          <Typography gutterBottom variant="h6" className={classes.title}>
             {title.length > 20 ? title.substring(0, 20) + " ..." : title}
           </Typography>
 
           <Typography
             variant="body2"
             color="textSecondary"
-            component="h2"
             className={classes.username}
           >
             {username}
@@ -73,7 +67,6 @@ const PostCard = ({
           <Typography
             variant="body2"
             color="textSecondary"
-            component="h2"
             className={classes.date}
           >
             {moment(dateCreated).fromNow()}
@@ -111,12 +104,7 @@ const PostCard = ({
 
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.content}
-            >
+            <Typography variant="h6" className={classes.content}>
               {content}
             </Typography>
           </CardContent>

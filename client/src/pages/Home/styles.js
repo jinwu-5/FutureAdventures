@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { createMuiTheme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -10,8 +11,21 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     padding: "5% 10%",
-    color: "pink",
+    color: "#8982B0",
   },
 }));
 
-export default useStyles;
+const theme = createMuiTheme({
+  overrides: {
+    MuiTypography: {
+      h2: {
+        fontFamily: "Cinzel Decorative, sans-serif",
+      },
+      h5: {
+        fontFamily: "Raleway, sans-serif",
+      },
+    },
+  },
+});
+
+export { useStyles, theme };

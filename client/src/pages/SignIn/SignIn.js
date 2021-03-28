@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useMutation } from "@apollo/client";
-import useStyles from "./styles";
+import { useStyles, theme } from "./styles";
+import { ThemeProvider } from "@material-ui/core/styles";
 import LOGIN from "../../graphql/User/SignIn";
 import { StoreContext } from "../../store/store";
 import { Alert } from "@material-ui/lab";
@@ -58,72 +59,78 @@ const SignInForm = () => {
   };
 
   return (
-    <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+    <ThemeProvider theme={theme}>
+      <Grid container component="main" className={classes.root}>
+        <CssBaseline />
+        <Grid item xs={false} sm={4} md={7} className={classes.image} />
 
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <PersonOutlineIcon />
-          </Avatar>
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <PersonOutlineIcon />
+            </Avatar>
 
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
 
-          <form className={classes.form} noValidate onSubmit={handleFormSubmit}>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              label="Username"
-              name="username"
-              required
-              fullWidth
-              autoFocus
-              onChange={handleInputChange}
-              value={username}
-            />
-
-            <TextField
-              variant="outlined"
-              margin="normal"
-              name="password"
-              label="Password"
-              type="password"
-              required
-              fullWidth
-              onChange={handleInputChange}
-              value={password}
-            />
-
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
+            <form
+              className={classes.form}
+              noValidate
+              onSubmit={handleFormSubmit}
             >
-              Sign In
-            </Button>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                label="Username"
+                name="username"
+                required
+                fullWidth
+                autoFocus
+                onChange={handleInputChange}
+                value={username}
+              />
 
-            {error && (
-              <Alert severity="error" className={classes.error}>
-                {error}
-              </Alert>
-            )}
+              <TextField
+                variant="outlined"
+                margin="normal"
+                name="password"
+                label="Password"
+                type="password"
+                required
+                fullWidth
+                onChange={handleInputChange}
+                value={password}
+              />
 
-            <Grid container justify="center">
-              <Grid item>
-                <Link href="/Register" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                Sign In
+              </Button>
+
+              {error && (
+                <Alert severity="error" className={classes.error}>
+                  {error}
+                </Alert>
+              )}
+
+              <Grid container justify="center">
+                <Grid item>
+                  <Link href="/Register" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
               </Grid>
-            </Grid>
-          </form>
-        </div>
+            </form>
+          </div>
+        </Grid>
       </Grid>
-    </Grid>
+    </ThemeProvider>
   );
 };
 

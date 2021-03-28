@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 1200,
     position: "relative",
-    margin: "7% 15% 0% 15%",
+    margin: "7% 15% 5% 15%",
   },
   title: {
     padding: "3% 0% 0% 3%",
@@ -28,9 +28,6 @@ const useStyles = makeStyles((theme) => ({
   inputField: {
     margin: "2.5% 2.5% 1.5% 2.5%",
   },
-  // submit: {
-  //   marginRight: "auto",
-  // },
   date: {
     display: "inline-block",
     paddingLeft: "10",
@@ -86,6 +83,22 @@ const theme = createMuiTheme({
         marginTop: 0,
         marginBottom: "8px",
       },
+    },
+    MuiTypography: {
+      h6: {
+        fontFamily: "Raleway, sans-serif",
+      },
+      h5: {
+        fontFamily: "Raleway, sans-serif",
+      },
+    },
+  },
+  palette: {
+    primary: {
+      main: "#4791db",
+    },
+    secondary: {
+      main: "#F26B8A",
     },
   },
 });

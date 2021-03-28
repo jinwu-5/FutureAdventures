@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useMutation } from "@apollo/client";
 import useStyles from "./styles";
+import { theme } from "../SignIn/styles";
+import { ThemeProvider } from "@material-ui/core/styles";
 import CREATE_USER from "../../graphql/User/SignUp";
 import { StoreContext } from "../../store/store";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
@@ -82,84 +84,86 @@ const SignUpForm = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <PersonOutlineIcon />
-        </Avatar>
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <PersonOutlineIcon />
+          </Avatar>
 
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
 
-        <form className={classes.form} noValidate onSubmit={handleFormSubmit}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                name="username"
-                variant="outlined"
-                label="Username"
-                required
-                fullWidth
-                autoFocus
-                onChange={handleInputChange}
-                value={username}
-              />
+          <form className={classes.form} noValidate onSubmit={handleFormSubmit}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  name="username"
+                  variant="outlined"
+                  label="Username"
+                  required
+                  fullWidth
+                  autoFocus
+                  onChange={handleInputChange}
+                  value={username}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  label="Email Address"
+                  name="email"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  onChange={handleInputChange}
+                  value={email}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  onChange={handleInputChange}
+                  value={password}
+                />
+              </Grid>
             </Grid>
 
-            <Grid item xs={12}>
-              <TextField
-                label="Email Address"
-                name="email"
-                variant="outlined"
-                required
-                fullWidth
-                onChange={handleInputChange}
-                value={email}
-              />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign Up
+            </Button>
+
+            {error && (
+              <Alert severity="error" className={classes.error}>
+                {error}
+              </Alert>
+            )}
+
+            <Grid container justify="center">
+              <Grid item>
+                <Link href="/login" variant="body2">
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
             </Grid>
-
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                onChange={handleInputChange}
-                value={password}
-              />
-            </Grid>
-          </Grid>
-
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign Up
-          </Button>
-
-          {error && (
-            <Alert severity="error" className={classes.error}>
-              {error}
-            </Alert>
-          )}
-
-          <Grid container justify="center">
-            <Grid item>
-              <Link href="/login" variant="body2">
-                Already have an account? Sign in
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-    </Container>
+          </form>
+        </div>
+      </Container>
+    </ThemeProvider>
   );
 };
 
