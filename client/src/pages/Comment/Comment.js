@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { StoreContext } from "../../store/store";
-import useStyles from "./styles";
+import { useStyles, theme } from "./styles";
+import { ThemeProvider } from "@material-ui/core/styles";
 import GET_POST from "../../graphql/Post/GetPost";
 import CREATE_COMMENT from "../../graphql/Comment/CreateComment";
 import moment from "moment";
@@ -70,107 +71,25 @@ function CommentPage(props) {
 
     postAndComment = (
       <div>
-        <Card className={classes.root}>
-          <CardContent>
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="h2"
-              className={classes.title}
-            >
-              {title}
-            </Typography>
-
-            <CardMedia
-              className={classes.media}
-              image={
-                imageUrl ||
-                "https://images.unsplash.com/photo-1484069560501-87d72b0c3669?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80"
-              }
-            />
-
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.content}
-            >
-              {content}
-            </Typography>
-
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="h2"
-              className={classes.username}
-            >
-              {username}
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="h2"
-              className={classes.date}
-            >
-              {moment(dateCreated).fromNow()}
-            </Typography>
-
-            <CardActions>
-              <PostLikeButton
-                user={user}
-                post={{ id, postLikes, postLikeCount }}
-                className={classes.like}
-              />
-
-              <Typography variant="body2" color="textSecondary">
-                {postLikeCount}
-              </Typography>
-
-              <IconButton aria-label="settings" className={classes.overlay}>
-                <OptionButton user={user} post={{ id, username }} />
-              </IconButton>
-            </CardActions>
-          </CardContent>
-        </Card>
-
-        {user && (
+        <ThemeProvider theme={theme}>
           <Card className={classes.root}>
             <CardContent>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                label="Post a comment"
-                name="comment"
-                required
-                fullWidth
-                autoFocus
-                onChange={(event) => setComment(event.target.value)}
-                value={comment}
-              />
-
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                disabled={comment.trim() === ""}
-                onClick={handleCommentSubmit}
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="h2"
+                className={classes.title}
               >
-                Submit
-              </Button>
-            </CardContent>
-          </Card>
-        )}
+                {title}
+              </Typography>
 
-        {comments.map((comment) => (
-          <Card className={classes.root} key={comment.id}>
-            <CardContent>
               <Typography
                 variant="body2"
                 color="textSecondary"
                 component="h2"
                 className={classes.username}
               >
-                {comment.username}
+                {username}
               </Typography>
 
               <Typography
@@ -179,39 +98,131 @@ function CommentPage(props) {
                 component="h2"
                 className={classes.date}
               >
-                {moment(comment.dateCreated).fromNow()}
+                {moment(dateCreated).fromNow()}
               </Typography>
+
+              <CardMedia
+                className={classes.media}
+                image={
+                  imageUrl ||
+                  "https://images.unsplash.com/photo-1484069560501-87d72b0c3669?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80"
+                }
+              />
 
               <Typography
                 variant="body2"
                 color="textSecondary"
-                component="h2"
-                className={classes.commentContent}
+                component="p"
+                className={classes.content}
               >
-                {comment.content}
+                {content}
               </Typography>
 
               <CardActions>
-                <CommentLikeButton
+                <PostLikeButton
                   user={user}
-                  postId={id}
-                  commentId={comment.id}
-                  comment={comment}
+                  post={{ id, postLikes, postLikeCount }}
+                  className={classes.like}
                 />
 
                 <Typography variant="body2" color="textSecondary">
-                  {comment.commentLikeCount}
+                  {postLikeCount}
                 </Typography>
 
-                <IconButton aria-label="settings">
-                  {user && user.username === comment.username && (
-                    <DeleteCommentButton postId={id} commentId={comment.id} />
-                  )}
+                <IconButton
+                  aria-label="settings"
+                  className={classes.optionButtonOverlay}
+                >
+                  <OptionButton user={user} post={{ id, username }} />
                 </IconButton>
               </CardActions>
             </CardContent>
           </Card>
-        ))}
+
+          {user && (
+            <Card className={classes.makeComment}>
+              <CardContent className={classes.inputField}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  label="Post a comment"
+                  name="comment"
+                  size="small"
+                  required
+                  fullWidth
+                  onChange={(event) => setComment(event.target.value)}
+                  value={comment}
+                />
+
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  disabled={comment.trim() === ""}
+                  onClick={handleCommentSubmit}
+                >
+                  Submit
+                </Button>
+              </CardContent>
+            </Card>
+          )}
+
+          {comments.map((comment) => (
+            <Card className={classes.comment} key={comment.id}>
+              <CardContent>
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  component="h2"
+                  className={classes.commentUsername}
+                >
+                  {comment.username}
+                </Typography>
+
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  component="h2"
+                  className={classes.date}
+                >
+                  {moment(comment.dateCreated).fromNow()}
+                </Typography>
+
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  component="h2"
+                  className={classes.commentContent}
+                >
+                  {comment.content}
+                </Typography>
+
+                <CardActions>
+                  <CommentLikeButton
+                    user={user}
+                    postId={id}
+                    commentId={comment.id}
+                    comment={comment}
+                  />
+
+                  <Typography variant="body2" color="textSecondary">
+                    {comment.commentLikeCount}
+                  </Typography>
+
+                  <IconButton
+                    aria-label="settings"
+                    className={classes.deleteButtonOverlay}
+                  >
+                    {user && user.username === comment.username && (
+                      <DeleteCommentButton postId={id} commentId={comment.id} />
+                    )}
+                  </IconButton>
+                </CardActions>
+              </CardContent>
+            </Card>
+          ))}
+        </ThemeProvider>
       </div>
     );
   }

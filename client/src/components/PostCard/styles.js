@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { createMuiTheme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,9 +39,34 @@ const useStyles = makeStyles((theme) => ({
   },
   overlay: {
     position: "absolute",
-    top: "63%",
-    left: "84%",
+    top: "67.5%",
+    left: "85.5%",
+  },
+  overrides: {
+    MuiCardActions: {
+      padding: "0px",
+    },
   },
 }));
 
-export default useStyles;
+const theme = createMuiTheme({
+  overrides: {
+    MuiCardActions: {
+      root: {
+        padding: "1px",
+      },
+    },
+    MuiCardContent: {
+      root: {
+        padding: "8px 16px",
+      },
+    },
+    MuiIconButton: {
+      root: {
+        fontSize: "0",
+      },
+    },
+  },
+});
+
+export { useStyles, theme };

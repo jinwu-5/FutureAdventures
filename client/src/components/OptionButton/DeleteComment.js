@@ -16,7 +16,7 @@ const DeleteCommentButton = ({ postId, commentId }) => {
     }
   };
 
-  return <DeleteIcon onClick={DeleteComment} />;
+  return <DeleteIcon onClick={DeleteComment} className="deleteButtonOverlay" />;
 };
 
 export default DeleteCommentButton;

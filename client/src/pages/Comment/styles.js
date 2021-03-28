@@ -1,32 +1,93 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { createMuiTheme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 1200,
     position: "relative",
-    margin: "7% 15%",
+    margin: "7% 15% 0% 15%",
+  },
+  title: {
+    padding: "3% 0% 0% 3%",
+  },
+  username: {
+    display: "inline-block",
+    padding: "0% 3%",
+    marginBottom: "2%",
+  },
+  makeComment: {
+    maxWidth: 1200,
+    position: "relative",
+    margin: "5% 15% 5% 15%",
+  },
+  comment: {
+    maxWidth: 1200,
+    position: "relative",
+    margin: "3% 15% 3% 15%",
+  },
+  inputField: {
+    margin: "2.5% 2.5% 1.5% 2.5%",
+  },
+  // submit: {
+  //   marginRight: "auto",
+  // },
+  date: {
+    display: "inline-block",
+    paddingLeft: "10",
   },
   media: {
     paddingTop: "100%",
     marginBottom: "5%",
   },
-  username: {
-    display: "inline-block",
-    paddingRight: "5%",
-    marginBottom: "2%",
-  },
   content: {
-    marginBottom: "2%",
+    paddingLeft: "3%",
   },
-  date: {
+  commentUsername: {
     display: "inline-block",
-    paddingLeft: "10",
+    padding: "2% 3%",
   },
-  overlay: {
+  commentContent: {
+    padding: "0% 0% 1% 3%",
+  },
+  optionButtonOverlay: {
     position: "absolute",
     top: "1%",
     right: "5px",
   },
+  deleteButtonOverlay: {
+    position: "absolute",
+    top: "58%",
+    right: "3px",
+  },
 }));
 
-export default useStyles;
+const theme = createMuiTheme({
+  overrides: {
+    MuiCardActions: {
+      root: {
+        padding: "1.5px",
+      },
+    },
+    MuiCardContent: {
+      root: {
+        padding: "0",
+        "&:last-child": {
+          paddingBottom: 0,
+        },
+      },
+    },
+    MuiIconButton: {
+      root: {
+        fontSize: "0",
+      },
+    },
+    MuiFormControl: {
+      marginNormal: {
+        marginTop: 0,
+        marginBottom: "8px",
+      },
+    },
+  },
+});
+
+export { useStyles, theme };

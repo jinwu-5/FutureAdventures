@@ -6,6 +6,7 @@ const DELETE_COMMENT = gql`
       id
       comments {
         id
+        username
       }
     }
   }
