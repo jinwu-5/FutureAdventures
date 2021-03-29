@@ -43,6 +43,7 @@ const DeleteCommentButton = ({ postId, commentId }) => {
           <Button onClick={handleClose} color="primary">
             Disagree
           </Button>
+
           <Button onClick={handleAgree} color="primary" autoFocus>
             Agree
           </Button>
