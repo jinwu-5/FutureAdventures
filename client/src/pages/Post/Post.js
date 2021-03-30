@@ -48,7 +48,7 @@ const Post = () => {
       });
       window.location.assign("/");
     } catch (error) {
-      console.error(error);
+      setError(error.graphQLErrors[0].message);
     }
   };
 
