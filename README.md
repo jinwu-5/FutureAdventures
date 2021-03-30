@@ -4,11 +4,17 @@ A social media platform for users to share their potential future endeavors and 
 
 #### Home Page:
 
+![Home Page](/client/public/image/homePage.png)
+
+#### Comment Page:
+
+![Comment Page](/client/public/image/commentPage.png)
+
+## Deployment
+
 [https://future-adventures.netlify.app/](https://future-adventures.netlify.app/)
 
 Backend Demo: [https://future-adventure.herokuapp.com/graphql](https://future-adventure.herokuapp.com/graphql)
-
-![Home Page](/client/public/image/futureAdventures.jpg)
 
 ## Development
 
