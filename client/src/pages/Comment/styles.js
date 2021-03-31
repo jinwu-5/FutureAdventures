@@ -39,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
   content: {
     paddingLeft: "3%",
   },
+  like: {
+    paddingLeft: "1%",
+  },
   commentUsername: {
     display: "inline-block",
     padding: "2% 3%",

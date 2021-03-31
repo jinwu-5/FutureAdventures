@@ -116,11 +116,10 @@ const CommentPage = (props) => {
                 {content}
               </Typography>
 
-              <CardActions>
+              <CardActions className={classes.like}>
                 <PostLikeButton
                   user={user}
                   post={{ id, postLikes, postLikeCount }}
-                  className={classes.like}
                 />
 
                 <Typography variant="body2" color="textSecondary">
@@ -194,7 +193,7 @@ const CommentPage = (props) => {
                   {comment.content}
                 </Typography>
 
-                <CardActions>
+                <CardActions className={classes.like}>
                   <CommentLikeButton
                     user={user}
                     postId={id}
